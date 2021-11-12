@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "331137762151",
+    "project_id": "thiago-exchange-47363",
+    "storage_bucket": "thiago-exchange-47363.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331137762151:android:630ff65c397964fa09a5c2",
+        "android_client_info": {
+          "package_name": "com.example.thiago_exchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331137762151-nf88r3il9nb6lcmthrhbrh6f68005g8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTXl8dRqM_AZiKfQ5xNBdeTTI7jyaNo5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331137762151-nf88r3il9nb6lcmthrhbrh6f68005g8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
