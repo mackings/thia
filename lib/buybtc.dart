@@ -22,7 +22,7 @@ class BuycoinState extends State<Buycoin> {
   void _launchURL() async =>
       await canLaunch(whatsapp) ? await launch(whatsapp) : throw 'Could not launch $whatsapp';
 
-  //Remote server
+  //Remote server config
   RemoteConfig remoteConfig = RemoteConfig.instance;
   Future Activate() async{
     bool updated = await remoteConfig.fetchAndActivate();
