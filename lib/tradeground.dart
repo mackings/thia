@@ -119,6 +119,7 @@ class _TradeGroundState extends State<TradeGround> {
                                   onTap: (){
                                    _launchURL();
 
+
                                   },
                                   child:  Text(
                                   "Help and Support",
