@@ -132,6 +132,7 @@ class _CreateAccState extends State<CreateAcc> {
                     ),
                   ),
                 ),
+                //yeah
                 SizedBox(
                   height: 20,
                 ),
@@ -208,7 +209,7 @@ class _CreateAccState extends State<CreateAcc> {
                       child: TextFormField(
                         controller: _passwordController,
                         obscureText: true,
-                        autovalidate: true,
+                      
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: " Enter Your Password",
