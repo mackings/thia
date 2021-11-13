@@ -31,7 +31,7 @@ class _finalbuyState extends State<finalbuy> {
         "Walletaddress": _walletaddressController.text,
         "WalletEmail":_walletemail.text,
         "Buyer Number": _phonenumber.text,
-        "Date":DateTime.now(),
+      
       },
 
     );
