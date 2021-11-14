@@ -22,7 +22,7 @@ class _LoginState extends State<Login> {
 
 
 
-  
+  //you can use this to check if the user is logged in
 
   Login() async {
     var email = _emailController.text;
