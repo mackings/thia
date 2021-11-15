@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>331137762151-25dgp2ulu9b01mv9m6uakmcejgqkfakc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.331137762151-25dgp2ulu9b01mv9m6uakmcejgqkfakc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD5tFu02VDFKAiMnSJZd8qi16S14uWuJQk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>331137762151</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.thiagoExchange</string>
+	<key>PROJECT_ID</key>
+	<string>thiago-exchange-47363</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thiago-exchange-47363.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:331137762151:ios:60881f7870830fca09a5c2</string>
+	<key>DATABASE_URL</key>
+	<string>https://thiago-exchange-47363-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
