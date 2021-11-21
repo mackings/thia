@@ -20,7 +20,7 @@ class BuycoinState extends State<Buycoin> {
   //whatsapp
   var whatsapp = ("https://wa.me/2348167556757?text=Hello%20Thiago Exchange%2C%20%20 %20in%20%20Nice using Your Mobile App");
   void _launchURL() async =>
-      await canLaunch(whatsapp) ? await launch(whatsapp) : throw 'Could not launch $whatsapp';
+      await canLaunch(whatsapp) ? await launch(whatsapp) : throw 'Could not even launch $whatsapp';
 
   //Remote server config
   RemoteConfig remoteConfig = RemoteConfig.instance;
