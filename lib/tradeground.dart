@@ -32,6 +32,8 @@ class _TradeGroundState extends State<TradeGround> {
         fetchTimeout: Duration( seconds: 60), minimumFetchInterval: Duration(minutes: 5),
     ));
     if(updated){
+      print("Remote Config Updated");
+
       //actions
 
     }else{
