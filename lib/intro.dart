@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,11 +35,7 @@ class _Intro1State extends State<Intro1> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _mycontroller.dispose();
-  }
+
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,12 +58,18 @@ class _Intro1State extends State<Intro1> {
                     ),
                   ),
                 ),
-
                 Enter(),
               ],
             )),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _mycontroller.dispose();
+    
   }
 }
 
@@ -77,97 +81,103 @@ class Enter extends StatefulWidget {
 }
 
 class _EnterState extends State<Enter> {
+
+
+  
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 400,
+          ),
+          //SvgPicture.asset(
+          // "assets/exchange.svg",
+          //height: 150,
+          //width: 150,
+          // ),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text(
+              "Thiago Exchange",
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 70,
+          ),
+          GestureDetector(
+            onTap: () {
+              
+             
+      
 
-      children: [
-         SizedBox(
-                    height: 200,
-                  ),
-                  SvgPicture.asset(
-                    "assets/exchange.svg",
-                    height: 150,
-                    width: 150,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Text(
-                      "Thiago Exchange",
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CreateAcc()));
+            },
+            child: Container(
+              height: 60,
+              width: 300,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  "Get Started",
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => CreateAcc()));
-                    },
-                    child: Container(
-                      height: 60,
-                      width: 300,
-                      decoration: BoxDecoration(
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
+              child: Container(
+                height: 60,
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    "Sign in",
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Get Started",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              color: Colors.deepPurpleAccent,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Login()));
-                      },
-                      child: Container(
-                        height: 60,
-                        width: 300,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Sign in",
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-
-      ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
