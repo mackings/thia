@@ -19,6 +19,12 @@ class _CreateAccState extends State<CreateAcc> {
   TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+
+
+
+  
+
   Createaccount() async {
     try {
       UserCredential userCredential =

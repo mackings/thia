@@ -74,7 +74,7 @@ class _finalbuyState extends State<finalbuy> {
 
                           ),
                           validator: (value){
-                            if(value==null || value.isEmpty){
+                            if(value==null || value.isEmpty || value.length<7){
                               return "Please Enter a valid crypto name";
                             }
                             return null;
@@ -111,7 +111,7 @@ class _finalbuyState extends State<finalbuy> {
 
                           ),
                           validator: (value){
-                            if(value==null || value.isEmpty){
+                            if(value==null || value.isEmpty && RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)){
                               return "Please Enter a valid wallet Address";
                             }
                             return null;

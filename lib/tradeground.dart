@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:thiago_exchange/Sellbtc.dart';
 import 'package:thiago_exchange/buybtc.dart';
+import 'package:thiago_exchange/games.dart';
 import 'package:thiago_exchange/login.dart';
 import 'package:thiago_exchange/finalbuy.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -142,17 +143,17 @@ class _TradeGroundState extends State<TradeGround> {
                             left: 58.345726013183594,
                             child: Row(
                               children: [
-                                Icon(Icons.person,color: Colors.white,),
+                                Icon(Icons.gamepad,color: Colors.white,),
                                 SizedBox(
                                   width: 5,
                                 ),
                                 InkWell(
                                   onTap: (){
-                                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Games()));
 
                                   },
                                   child:  Text(
-                                  "About Thiago",
+                                  "Play Games",
                                   style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
                                       color: Colors.white,
@@ -249,7 +250,7 @@ class _TradeGroundState extends State<TradeGround> {
                               _globalKey.currentState!.openDrawer();
 
                             },
-                              child: Icon(Icons.menu,color: Colors.white,)),
+                              child: Icon(Icons.menu,color: Colors.white, size: 40,)),
                         ),
                       ],
                     ),
