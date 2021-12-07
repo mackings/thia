@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,7 @@ class _Intro1State extends State<Intro1> {
     _mycontroller.initialize().then((_) {
       _mycontroller.play();
       _mycontroller.setLooping(true);
+      Timer(Duration(seconds: 61), () => _mycontroller.pause());
 
       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
       setState(() {});
@@ -34,8 +35,6 @@ class _Intro1State extends State<Intro1> {
 
     super.initState();
   }
-
-
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,7 +68,6 @@ class _Intro1State extends State<Intro1> {
   void dispose() {
     super.dispose();
     _mycontroller.dispose();
-    
   }
 }
 
@@ -81,16 +79,13 @@ class Enter extends StatefulWidget {
 }
 
 class _EnterState extends State<Enter> {
-
-
-  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           SizedBox(
-            height: 400,
+            height: 390,
           ),
           //SvgPicture.asset(
           // "assets/exchange.svg",
@@ -113,19 +108,31 @@ class _EnterState extends State<Enter> {
             ),
           ),
           SizedBox(
-            height: 70,
+            height: 10,
+          ),
+
+          Center(
+            child: Text(
+              "Your Best Plug for Crypto Trades",
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 60,
           ),
           GestureDetector(
             onTap: () {
-              
-             
-      
-
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => CreateAcc()));
             },
             child: Container(
-              height: 60,
+              height: 55,
               width: 300,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -136,7 +143,7 @@ class _EnterState extends State<Enter> {
                   "Get Started",
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                      color: Colors.black,
+                      color: Colors.deepPurpleAccent,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -155,7 +162,7 @@ class _EnterState extends State<Enter> {
                     context, MaterialPageRoute(builder: (context) => Login()));
               },
               child: Container(
-                height: 60,
+                height: 55,
                 width: 300,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,

@@ -61,7 +61,8 @@ class _LoginState extends State<Login> {
 
     _auth
         .signInWithEmailAndPassword(
-            email: _emailController.text.trim(), password: _passwordController.text.trim())
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim())
         .then((user) async {
       if (user != null) {
         // setState(() {
@@ -72,6 +73,7 @@ class _LoginState extends State<Login> {
         prefs.setString('password', _passwordController.text);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => TradeGround()));
+        print(prefs.getString("email"));
       }
     }).catchError((e) {
       // print(e);
@@ -85,13 +87,13 @@ class _LoginState extends State<Login> {
             ),
             content: Text(
               e.message,
-              style: TextStyle(fontFamily: 'Montserrat'),
+              style:  GoogleFonts.montserrat(),
             ),
             actions: <Widget>[
               FlatButton(
                 child: Text(
                   'Close',
-                  style: TextStyle(fontFamily: 'Montserrat'),
+                  style:  GoogleFonts.montserrat(),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -155,6 +157,8 @@ class _LoginState extends State<Login> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: " Enter Email",
+                                  errorStyle: GoogleFonts.montserrat(
+                                      color: Colors.deepPurpleAccent),
                                   hintStyle: GoogleFonts.montserrat(
                                     color: Colors.deepPurpleAccent,
                                   ),
@@ -197,6 +201,8 @@ class _LoginState extends State<Login> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: " Enter Password",
+                                  errorStyle: GoogleFonts.montserrat(
+                                      color: Colors.deepPurpleAccent),
                                   hintStyle: GoogleFonts.montserrat(
                                     color: Colors.deepPurpleAccent,
                                   ),
@@ -216,7 +222,7 @@ class _LoginState extends State<Login> {
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
                               Signinconfig();
-                             // Login();
+                              // Login();
                             } else {
                               showDialog(
                                 context: context,

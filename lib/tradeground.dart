@@ -6,6 +6,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:thiago_exchange/Sellbtc.dart';
 import 'package:thiago_exchange/buybtc.dart';
 import 'package:thiago_exchange/games.dart';
+import 'package:thiago_exchange/globalrates.dart';
 import 'package:thiago_exchange/login.dart';
 import 'package:thiago_exchange/finalbuy.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -93,7 +94,7 @@ class _TradeGroundState extends State<TradeGround> {
 
                                 InkWell(
                                   onTap: (){
-                                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Globalrates()));
                                   },
                                   child:   Text(
                                   "Global Rates",
