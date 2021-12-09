@@ -48,19 +48,21 @@ class BuycoinState extends State<Buycoin> {
 
         body: SingleChildScrollView(
           child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: Center(
               child: Column(
                 children: [
                   SizedBox(
                     height: 70,
                   ),
-                  SvgPicture.asset("assets/buy.svg",height: 200, width: 200,),
+                  SvgPicture.asset("assets/buy.svg",height: MediaQuery.of(context).size.height - 430,  width: MediaQuery.of(context).size.width,),
                   SizedBox(
                     height: 20,
                   ),
                   Container(
-                    height: 70,
-                    width: 320,
+                   height: MediaQuery.of(context).size.height /10,
+                      width: MediaQuery.of(context).size.width - 15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -87,8 +89,8 @@ class BuycoinState extends State<Buycoin> {
                   ),
 
                   Container(
-                    height: 70,
-                    width: 320,
+                  height: MediaQuery.of(context).size.height /10,
+                      width: MediaQuery.of(context).size.width - 15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -114,8 +116,8 @@ class BuycoinState extends State<Buycoin> {
                     height: 20,
                   ),
                   Container(
-                    height: 70,
-                    width: 320,
+                   height: MediaQuery.of(context).size.height /10,
+                      width: MediaQuery.of(context).size.width - 15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -138,7 +140,7 @@ class BuycoinState extends State<Buycoin> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
 
                   GestureDetector(
@@ -170,15 +172,15 @@ class BuycoinState extends State<Buycoin> {
                     child: Container(
 
                       child: Container(
-                        height: 60,
-                        width: 320,
+                        height: MediaQuery.of(context).size.height /10,
+                      width: MediaQuery.of(context).size.width - 15,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                         child: Center(
                           child: Text("Buy Now",style: GoogleFonts.montserrat(textStyle: TextStyle(
-                            color: Colors.deepPurpleAccent,
+                            color: Colors.white,
                           )),),
                         ),
 

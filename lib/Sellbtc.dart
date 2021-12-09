@@ -12,7 +12,6 @@ import 'package:image_picker/image_picker.dart';
 import "package:firebase_storage/firebase_storage.dart";
 import 'package:thiago_exchange/tradeground.dart';
 
-
 class Sellbtc extends StatefulWidget {
   const Sellbtc({Key? key}) : super(key: key);
 
@@ -21,9 +20,6 @@ class Sellbtc extends StatefulWidget {
 }
 
 class _SellbtcState extends State<Sellbtc> {
-
-
-
   //proofupload
   File? _selectedImage;
   final picker = ImagePicker();
@@ -42,22 +38,16 @@ class _SellbtcState extends State<Sellbtc> {
   }
 
   //Database
- 
-  Uploadproof() async {
 
+  Uploadproof() async {
     FirebaseStorage fs = FirebaseStorage.instance;
     final reference = fs.ref();
     final picturefolder = reference.child("Proffs").child("Cards");
-    picturefolder.putFile(_selectedImage!).whenComplete(() => () async{
-     imageLink = await picturefolder.getDownloadURL();
-     print("Hellow");
-    });
-    
-
-   
-
+    picturefolder.putFile(_selectedImage!).whenComplete(() => () async {
+          imageLink = await picturefolder.getDownloadURL();
+          print("Hellow");
+        });
   }
-
 
   //Remote server
   RemoteConfig WALLETConfig = RemoteConfig.instance;
@@ -65,18 +55,9 @@ class _SellbtcState extends State<Sellbtc> {
     bool updated = await WALLETConfig.fetchAndActivate();
     await WALLETConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: Duration(seconds: 60),
-      minimumFetchInterval: Duration(minutes: 5),
+      minimumFetchInterval: Duration(minutes: 1),
     ));
-    if (updated) {
-      //actions
-
-    } else {
-      //reverseacions
-
-    }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +84,8 @@ class _SellbtcState extends State<Sellbtc> {
                     waletconfig();
                   },
                   child: Container(
-                    height: 70,
-                    width: 340,
+                    height: MediaQuery.of(context).size.height / 10,
+                    width: MediaQuery.of(context).size.width - 15,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -152,8 +133,8 @@ class _SellbtcState extends State<Sellbtc> {
                     waletconfig();
                   },
                   child: Container(
-                    height: 70,
-                    width: 340,
+                    height: MediaQuery.of(context).size.height / 10,
+                    width: MediaQuery.of(context).size.width - 15,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -198,8 +179,8 @@ class _SellbtcState extends State<Sellbtc> {
                     waletconfig();
                   },
                   child: Container(
-                    height: 70,
-                    width: 340,
+                    height: MediaQuery.of(context).size.height / 10,
+                    width: MediaQuery.of(context).size.width - 15,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -303,58 +284,115 @@ class _SellbtcState extends State<Sellbtc> {
                           height: 20,
                         ),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context){
-                                  return AlertDialog(
-                                    content: Text("Have you screenshot your transaction ?",style: GoogleFonts.montserrat(),),
-                                    actions: [
-                                      MaterialButton(
-                                          onPressed: (){
-                                            Uploadproof();
-                                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: Text(
+                                    "Have you screenshot your transaction ?",
+                                    style: GoogleFonts.montserrat(),
+                                  ),
+                                  actions: [
+                                    MaterialButton(
+                                      onPressed: () {
+                                        if (_selectedImage == null) {
+                                          showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title: Text("Success",style: GoogleFonts.montserrat(),),
-                                                  content: Text("Your Trade has been Submitted, You would be contacted soon",style: GoogleFonts.montserrat(),),
-                                                  actions: <Widget>[
-                                                    FlatButton(
-                                                      child: Text("Continue",style: GoogleFonts.montserrat()),
+                                                  content: Text(
+                                                    "Please upload your screenshot",
+                                                    style: GoogleFonts
+                                                        .montserrat(),
+                                                  ),
+                                                  actions: [
+                                                    MaterialButton(
                                                       onPressed: () {
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
+                                                        Navigator.pop(context);
                                                       },
-                                                    ),
-                                                    FlatButton(
-                                                      child: Text("Home",style: GoogleFonts.montserrat()),
-                                                      onPressed: () {
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
-                                                      },
-                                                    ),
+                                                      child: Text(
+                                                        "Ok",
+                                                        style: GoogleFonts
+                                                            .montserrat(),
+                                                      ),
+                                                    )
                                                   ],
                                                 );
-                                              },
+                                              });
+                                        } else {
+                                          Uploadproof();
+                                        }
+                                        //Uploadproof();
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                "Success",
+                                                style: GoogleFonts.montserrat(),
+                                              ),
+                                              content: Text(
+                                                "Your Trade has been Submitted, You would be contacted soon",
+                                                style: GoogleFonts.montserrat(),
+                                              ),
+                                              actions: <Widget>[
+                                                FlatButton(
+                                                  child: Text("Continue",
+                                                      style: GoogleFonts
+                                                          .montserrat()),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                TradeGround()));
+                                                  },
+                                                ),
+                                                FlatButton(
+                                                  child: Text("Home",
+                                                      style: GoogleFonts
+                                                          .montserrat()),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                TradeGround()));
+                                                  },
+                                                ),
+                                              ],
                                             );
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
                                           },
-                                        child: Text("YES",style: GoogleFonts.montserrat(),),
-                                          ),
-                                      MaterialButton(
-                                        onPressed: (){
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("NO",style: GoogleFonts.montserrat(),),
+                                        );
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TradeGround()));
+                                      },
+                                      child: Text(
+                                        "YES",
+                                        style: GoogleFonts.montserrat(),
                                       ),
-                                    ],
-
-                                  );
-                                },
+                                    ),
+                                    MaterialButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "NO",
+                                        style: GoogleFonts.montserrat(),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
                           child: Container(
                             height: 60,
-                            width: 200,
+                            width: MediaQuery.of(context).size.width - 180,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),

@@ -26,26 +26,23 @@ class Globalrates extends StatefulWidget {
 class _GlobalratesState extends State<Globalrates> {
   final url = ("https://blockchain.info/ticker");
 
-  late Map Power;
+  // ignore: non_constant_identifier_names
+  late final Map Databody;
 
-  get Release => null;
 
-  fetchapi() async {
-    final Response = await http.get(Uri.parse(url)).then((response) {
-      final Datas = Map<String, dynamic>.from(json.decode(response.body));
-
-      print(Datas);
-      setState(() {
-        Power = Datas;
-      });
+  GetApidata() async {
+    var response = await http.get(Uri.parse(url));
+    Databody = jsonDecode(response.body);
+    print(Databody);
+    setState(() {
+      Databody = Databody;
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    fetchapi();
+    GetApidata();
   }
 
   @override
@@ -60,7 +57,9 @@ class _GlobalratesState extends State<Globalrates> {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    fetchapi();
+                    GetApidata();
+
+                    //fetchapi();
                   },
                   child: Container(
                     height: 100,
@@ -69,22 +68,38 @@ class _GlobalratesState extends State<Globalrates> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: FutureBuilder(
-                      future: fetchapi(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          return  Text(
-                            "1 BTC = ${Power['USD']['buy']} USD",
-                            style: GoogleFonts.montserrat(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurpleAccent,
-                            ),
-                          );
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                      },
+                    child: Center(
+                      child: FutureBuilder(
+                        future: GetApidata(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (ConnectionState.done ==
+                              snapshot.connectionState) {
+                            return Container(
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else {
+                            return Column(
+                              children: [
+                                Text(
+                                  "USD",
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "1 USD = ${Databody["USD"]["buy"]} BRL",
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),

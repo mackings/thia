@@ -27,7 +27,7 @@ class _Intro1State extends State<Intro1> {
     _mycontroller.initialize().then((_) {
       _mycontroller.play();
       _mycontroller.setLooping(true);
-      Timer(Duration(seconds: 61), () => _mycontroller.pause());
+      Timer(Duration(seconds: 10), () => _mycontroller.pause());
 
       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
       setState(() {});
@@ -132,8 +132,8 @@ class _EnterState extends State<Enter> {
                   MaterialPageRoute(builder: (context) => CreateAcc()));
             },
             child: Container(
-              height: 55,
-              width: 300,
+              height: MediaQuery.of(context).size.height / 12, 
+                width: MediaQuery.of(context).size.width -40,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -162,8 +162,9 @@ class _EnterState extends State<Enter> {
                     context, MaterialPageRoute(builder: (context) => Login()));
               },
               child: Container(
-                height: 55,
-                width: 300,
+                height: MediaQuery.of(context).size.height / 12, 
+                width: MediaQuery.of(context).size.width -40,
+                //width: 300,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
                   borderRadius: BorderRadius.circular(10),
