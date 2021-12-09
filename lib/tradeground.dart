@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +11,7 @@ import 'package:thiago_exchange/globalrates.dart';
 import 'package:thiago_exchange/login.dart';
 import 'package:thiago_exchange/finalbuy.dart';
 import 'package:url_launcher/url_launcher.dart';
+import "package:carousel_slider/carousel_controller.dart";
 
 class TradeGround extends StatefulWidget {
   const TradeGround({Key? key}) : super(key: key);
@@ -48,6 +50,7 @@ class _TradeGroundState extends State<TradeGround> {
   getremotevalues() {}
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +232,7 @@ class _TradeGroundState extends State<TradeGround> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 70,
+                  height: 20,
                 ),
                 Row(
                   children: [
@@ -253,11 +256,127 @@ class _TradeGroundState extends State<TradeGround> {
                     ),
                   ],
                 ),
-                SvgPicture.asset(
-                  "assets/girls.svg",
-                  height: MediaQuery.of(context).size.height - 430,
-                  width: MediaQuery.of(context).size.width,
-                ),
+
+
+                CarouselSlider(
+                  
+                
+
+                  carouselController: _controller,
+                  options: CarouselOptions(
+
+                
+              
+                  height: 250,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  aspectRatio: 2,
+                  viewportFraction: 0.9,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+
+                  ),
+                  
+                   items: [
+
+                     Container(
+                       height: MediaQuery.of(context).size.height,
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(20),
+                         
+                           image: DecorationImage(
+                               image: AssetImage('assets/eth.jpg'),
+                               fit: BoxFit.cover)),
+                      
+                     ),
+
+//image2
+                     Container(
+                       height: MediaQuery.of(context).size.height,
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(20),
+                         
+                           image: DecorationImage(
+                               image: AssetImage('assets/bitcoin.png'),
+                               fit: BoxFit.cover)),
+                      
+                     ),
+
+                     //img3
+
+                      Container(
+                       height: MediaQuery.of(context).size.height,
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(20),
+                         
+                           image: DecorationImage(
+                               image: AssetImage('assets/cry1.png'),
+                               fit: BoxFit.cover)),
+                      
+                     ),
+
+
+                     //im4
+
+                      Container(
+                       height: MediaQuery.of(context).size.height,
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(20),
+                         
+                           image: DecorationImage(
+                               image: AssetImage('assets/cry2.png'),
+                               fit: BoxFit.cover)),
+                      
+                     ),
+
+                     //img5
+
+                      Container(
+                       height: MediaQuery.of(context).size.height,
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(20),
+                         
+                           image: DecorationImage(
+                               image: AssetImage('assets/cry4.png'),
+                               fit: BoxFit.cover)),
+                      
+                     ),
+
+
+                     Container(
+                       height: MediaQuery.of(context).size.height,
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(20),
+                         
+                           image: DecorationImage(
+                               image: AssetImage('assets/cry5.jpg'),
+                               fit: BoxFit.cover)),
+                      
+                     ),
+
+
+                      
+
+
+
+                   ],
+                  ),
+
+                // SvgPicture.asset(
+                // "assets/girls.svg",
+                ////height: MediaQuery.of(context).size.height - 430,
+                // width: MediaQuery.of(context).size.width,
+                //  ),
                 SizedBox(
                   height: 20,
                 ),
@@ -369,74 +488,82 @@ class _TradeGroundState extends State<TradeGround> {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Activate();
-                        },
+                Container(
+                  height: MediaQuery.of(context).size.height / 10,
+                  width: MediaQuery.of(context).size.width - 10,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Activate();
+                          },
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Buycoin()));
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 12,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Buy",
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                    color: Colors.deepPurpleAccent,
+                                  )),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 70,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Buycoin()));
+                                    builder: (context) => Sellbtc()));
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height / 12,
                             width: 120,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             child: Center(
                               child: Text(
-                                "Buy",
+                                "Sell",
                                 style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
-                                  color: Colors.deepPurpleAccent,
+                                  color: Colors.white,
                                 )),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Sellbtc()));
-                        },
-                        child: Container(
-                          height: MediaQuery.of(context).size.height / 12,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.black,
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Sell",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                color: Colors.white,
-                              )),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )
               ],
             ),

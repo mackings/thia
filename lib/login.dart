@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                             height: 80,
                           ),
                           SvgPicture.asset(
-                            "assets/socialgirl.svg",
+                            "assets/loginguys.svg",
                             height: MediaQuery.of(context).size.height - 430,
                             width: MediaQuery.of(context).size.width - 200,
                           ),
@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height / 10,
-                            width: MediaQuery.of(context).size.width -20,
+                            width: MediaQuery.of(context).size.width -40,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -156,18 +156,21 @@ class _LoginState extends State<Login> {
                                       _emailController.text = value!;
                                     });
                                   },
-                                  controller: _emailController,
+                                  controller: _emailController,style: GoogleFonts.montserrat(),
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: " Enter Email",
+                                    
                                     errorStyle: GoogleFonts.montserrat(
                                         color: Colors.deepPurpleAccent),
                                     hintStyle: GoogleFonts.montserrat(
                                       color: Colors.black,
+                                      fontSize: 20,
                                     ),
                                     suffixIcon: Icon(
                                       Icons.email,
                                       color: Colors.black,
+                                      size: 30,
                                     ),
                                   ),
                                 ),
@@ -179,7 +182,7 @@ class _LoginState extends State<Login> {
                           ),
                           Container(
                              height: MediaQuery.of(context).size.height / 10,
-                            width: MediaQuery.of(context).size.width -20,
+                            width: MediaQuery.of(context).size.width -30,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -199,7 +202,7 @@ class _LoginState extends State<Login> {
                                       _passwordController.text = value!;
                                     });
                                   },
-                                  controller: _passwordController,
+                                  controller: _passwordController,style: GoogleFonts.montserrat(),
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -208,10 +211,12 @@ class _LoginState extends State<Login> {
                                         color: Colors.deepPurpleAccent),
                                     hintStyle: GoogleFonts.montserrat(
                                       color: Colors.black,
+                                      fontSize:20 
                                     ),
                                     suffixIcon: Icon(
                                       Icons.lock_open,
                                       color: Colors.black,
+                                      size: 30,
                                     ),
                                   ),
                                 ),

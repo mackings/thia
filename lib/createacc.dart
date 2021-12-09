@@ -332,7 +332,9 @@ class _CreateAccState extends State<CreateAcc> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: _confirmpasswordController,
+                            controller: _confirmpasswordController,style: GoogleFonts.montserrat(
+                              color: Colors.black,
+                            ),
                             validator: (value) {
                               if (value!.isEmpty ||
                                   value != _passwordController.text) {
