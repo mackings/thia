@@ -27,22 +27,22 @@ class _GlobalratesState extends State<Globalrates> {
   final url = ("https://blockchain.info/ticker");
 
   // ignore: non_constant_identifier_names
-  late final Map Databody;
 
+  late Map Response;
 
-  GetApidata() async {
+   Future Getrates() async {
     var response = await http.get(Uri.parse(url));
-    Databody = jsonDecode(response.body);
-    print(Databody);
-    setState(() {
-      Databody = Databody;
-    });
+    if (response.statusCode == 200) {
+      Map<String, dynamic> Response = json.decode(response.body);
+      List<dynamic> rates = Response['USD'];
+    }
   }
 
   @override
   void initState() {
+    //var fetchrates = Fetchrates();
     super.initState();
-    GetApidata();
+    Getrates();
   }
 
   @override
@@ -57,9 +57,7 @@ class _GlobalratesState extends State<Globalrates> {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    GetApidata();
-
-                    //fetchapi();
+                    Getrates();
                   },
                   child: Container(
                     height: 100,
@@ -68,38 +66,29 @@ class _GlobalratesState extends State<Globalrates> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
-                      child: FutureBuilder(
-                        future: GetApidata(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (ConnectionState.done ==
-                              snapshot.connectionState) {
-                            return Container(
-                              child: Center(
-                                child: CircularProgressIndicator(),
+                    child: FutureBuilder(
+                      future: Getrates(),
+                      builder: (context, AsyncSnapshot<dynamic> snapshot) {
+                        if (snapshot.hasData && ConnectionState ==  ConnectionState.done) {
+                          return Column(
+                            children: [
+                              Text(
+                                "${snapshot.data['USD']['15m']}",
+                                style: GoogleFonts.lato(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.deepPurpleAccent,
+                                ),
                               ),
-                            );
-                          } else {
-                            return Column(
-                              children: [
-                                Text(
-                                  "USD",
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "1 USD = ${Databody["USD"]["buy"]} BRL",
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            );
-                          }
-                        },
-                      ),
+                             
+                            ],
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),

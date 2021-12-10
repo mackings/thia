@@ -438,13 +438,23 @@ class _TradeGroundState extends State<TradeGround> {
                       SizedBox(
                         width: 20,
                       ),
-                      Text(
-                        "                     ${remoteConfig.getString("Usdt")}",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
+                      Container(
+                        width: MediaQuery.of(context).size.width - 100,
+                        height: MediaQuery.of(context).size.height / 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.black,
-                          fontSize: 20,
-                        )),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "                     ${remoteConfig.getString("Usdt")}",
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            )),
+                          ),
+                        ),
                       ),
                     ],
                   ),

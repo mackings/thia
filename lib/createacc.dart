@@ -120,7 +120,7 @@ class _CreateAccState extends State<CreateAcc> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 30,
+                      height: 70,
                     ),
                     Center(
                       child: Text(
@@ -137,8 +137,8 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                      height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -159,6 +159,7 @@ class _CreateAccState extends State<CreateAcc> {
                               hintText: " Enter Full Name",
                               hintStyle: GoogleFonts.montserrat(
                                 color: Colors.black,
+
                               ),
                               suffixIcon: Icon(
                                 Icons.account_circle,
@@ -173,8 +174,8 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                      height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -210,8 +211,8 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                       height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -246,8 +247,8 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                     height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                      height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -283,8 +284,8 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                     height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                      height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -322,8 +323,8 @@ class _CreateAccState extends State<CreateAcc> {
                     ),
         
                     Container(
-                    height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                    height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -362,8 +363,8 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /10,
-                      width: MediaQuery.of(context).size.width - 20,
+                       height: MediaQuery.of(context).size.height /12,
+                      width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),

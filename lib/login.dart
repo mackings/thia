@@ -18,6 +18,14 @@ class _LoginState extends State<Login> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   var _formKey = GlobalKey<FormState>();
+  bool visible = true;
+  bool notVisible = false;
+  void showpass(){
+    setState(() {
+      visible = !visible;
+      notVisible = !notVisible;
+    });
+  }
 
   //you can use this to check if the user is logged in
 
@@ -132,11 +140,37 @@ class _LoginState extends State<Login> {
                             width: MediaQuery.of(context).size.width - 200,
                           ),
                           SizedBox(
-                            height: 60,
+                            height: 40,
                           ),
+
+                          Text(
+                            "Hello User",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+
+                           SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Kindly Login to continue",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                           SizedBox(
+                            height: 20,
+                          ),
+
+
+
+
                           Container(
-                            height: MediaQuery.of(context).size.height / 10,
-                            width: MediaQuery.of(context).size.width -40,
+                             height: MediaQuery.of(context).size.height /12,
+                             width: MediaQuery.of(context).size.width - 25,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -165,7 +199,7 @@ class _LoginState extends State<Login> {
                                         color: Colors.deepPurpleAccent),
                                     hintStyle: GoogleFonts.montserrat(
                                       color: Colors.black,
-                                      fontSize: 20,
+                                      fontSize: 18,
                                     ),
                                     suffixIcon: Icon(
                                       Icons.email,
@@ -178,11 +212,11 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 20,
                           ),
                           Container(
-                             height: MediaQuery.of(context).size.height / 10,
-                            width: MediaQuery.of(context).size.width -30,
+                              height: MediaQuery.of(context).size.height /12,
+                              width: MediaQuery.of(context).size.width - 25,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -203,7 +237,7 @@ class _LoginState extends State<Login> {
                                     });
                                   },
                                   controller: _passwordController,style: GoogleFonts.montserrat(),
-                                  obscureText: true,
+                                  obscureText: notVisible,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: " Enter Password",
@@ -211,12 +245,19 @@ class _LoginState extends State<Login> {
                                         color: Colors.deepPurpleAccent),
                                     hintStyle: GoogleFonts.montserrat(
                                       color: Colors.black,
-                                      fontSize:20 
+                                      fontSize:18 
                                     ),
-                                    suffixIcon: Icon(
-                                      Icons.lock_open,
-                                      color: Colors.black,
-                                      size: 30,
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          
+                                        });
+                                      },
+                                      child: Icon(
+                                        Icons.lock_open,
+                                        color: Colors.black,
+                                        size: 30,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -260,8 +301,8 @@ class _LoginState extends State<Login> {
                               }
                             },
                             child: Container(
-                               height: MediaQuery.of(context).size.height / 10,
-                            width: MediaQuery.of(context).size.width -20,
+                               height: MediaQuery.of(context).size.height /12,
+                              width: MediaQuery.of(context).size.width - 25,
                               decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(10),
