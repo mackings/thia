@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:thiago_exchange/login.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,6 +14,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:shared_preferences/shared_preferences.dart";
+import 'package:http/http.dart' as http;
 
 class CreateAcc extends StatefulWidget {
   const CreateAcc({Key? key}) : super(key: key);
@@ -30,6 +34,69 @@ class _CreateAccState extends State<CreateAcc> {
   final _formKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+   final Walleturl = ("https://sandbox.wallets.africa/wallet/generate");
+  final secret = ('hfucj5jatq8h');
+  String bearer = ('uvjqzm5xl6bw');
+
+  dynamic WalletID;
+
+
+
+  Future Createwallet() async {
+
+    final response = await http.post(
+      Uri.parse(Walleturl),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $bearer",
+      },
+      body: jsonEncode(
+        {
+          
+  "firstName": _fullnameController.text,
+  "lastName": _fullnameController.text,  
+  "Bvn":_phonenumber.text, 
+  "email": _emailController.text,  
+  "secretKey": secret,
+  "dateOfBirth": "1946-01-12",
+  "phoneNumber": 0000000000,
+  "password": _passwordController.text,
+  "currency": "NGN"
+          
+          
+      
+          
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      setState(() {
+        WalletID = responseJson['data']['phoneNumber'];
+      });
+
+     
+    } else {
+      print(response.statusCode);
+      print(bearer);
+    }
+
+
+    
+    var walletbox = Hive.box('user');
+    await walletbox.put('walletid', WalletID).whenComplete(() => print("Hive saved" + WalletID));
+
+    //print(response.body);
+  }
+
+
+
+
+
+
+
 
   storeuserdetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

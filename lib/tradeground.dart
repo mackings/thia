@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:hive/hive.dart';
 import 'package:thiago_exchange/Sellbtc.dart';
+import 'package:thiago_exchange/Userbalance.dart';
+import 'package:thiago_exchange/adminpage.dart';
 import 'package:thiago_exchange/buybtc.dart';
 import 'package:thiago_exchange/games.dart';
 import 'package:thiago_exchange/globalrates.dart';
@@ -47,6 +50,23 @@ class _TradeGroundState extends State<TradeGround> {
     }
   }
 
+
+   var walletID;
+   dynamic Actualbal;
+
+  Future viewhive() async {
+    final balbox = Hive.box('user');
+    print(balbox.get('walletBalance'));
+    print(balbox.get('walletid'));
+    setState(() {
+      Actualbal = balbox.get('walletBalance');
+      walletID = balbox.get('walletid');
+    });
+    print('Actualbalance is $Actualbal');
+    print('walletID is $walletID');
+  }
+
+
   getremotevalues() {}
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
@@ -70,21 +90,49 @@ class _TradeGroundState extends State<TradeGround> {
                   child: Stack(children: <Widget>[
                     Positioned(
                         top: 72,
-                        left: 78.3457260131836,
-                        child: Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Color.fromRGBO(81, 163, 163, 1),
-                                width: 1,
-                              ),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/bitcoin.png'),
-                                  fit: BoxFit.fitWidth),
-                              borderRadius:
-                                  BorderRadius.all(Radius.elliptical(80, 80)),
-                            ))),
+                        left: 38.3457260131836,
+                        child: Row(
+                          children: [
+                            Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromRGBO(81, 163, 163, 1),
+                                    width: 1,
+                                  ),
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/bitcoin.png'),
+                                      fit: BoxFit.fitWidth),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.elliptical(80, 80)),
+                                )),
+                                SizedBox( width: 20,),
+
+                                 Column(
+                                   children: [
+
+                                     Text(
+                        "Wallet ID",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            
+                            color: Colors.white
+                            ),
+                      ),
+
+                               Text(
+                        "000000000",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            
+                            color: Colors.white
+                            ),
+                      ),
+                                   ],
+                                 ),
+                          ],
+                        )),
                     Positioned(
                         top: 237,
                         left: 58.345726013183594,
@@ -136,7 +184,7 @@ class _TradeGroundState extends State<TradeGround> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const Globalrates()));
+                                        builder: (context) => const Userbalance()));
                               },
                               child: Text(
                                 "Wallet",
@@ -201,6 +249,40 @@ class _TradeGroundState extends State<TradeGround> {
                               },
                               child: Text(
                                 "Play Games",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+
+
+                         Positioned(
+                        top: 350,
+                        left: 58.345726013183594,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.lock,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Admin()));
+                              },
+                              child: Text(
+                                "Admin",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                     color: Colors.white,
