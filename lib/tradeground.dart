@@ -102,10 +102,44 @@ class _TradeGroundState extends State<TradeGround> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Globalrates()));
+                                        builder: (context) => const Globalrates()));
                               },
                               child: Text(
                                 "Global Rates",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+
+
+                         Positioned(
+                        top: 200,
+                        left: 58.345726013183594,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.wallet_giftcard,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Globalrates()));
+                              },
+                              child: Text(
+                                "Wallet",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                     color: Colors.white,
@@ -443,7 +477,7 @@ class _TradeGroundState extends State<TradeGround> {
                         height: MediaQuery.of(context).size.height / 10,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.black,
+                          color: Colors.blue,
                         ),
                         child: Center(
                           child: Text(
@@ -558,7 +592,7 @@ class _TradeGroundState extends State<TradeGround> {
                             width: 120,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.black,
+                              color: Colors.blue,
                             ),
                             child: Center(
                               child: Text(

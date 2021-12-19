@@ -26,23 +26,28 @@ class Globalrates extends StatefulWidget {
 class _GlobalratesState extends State<Globalrates> {
   final url = ("https://blockchain.info/ticker");
 
-  // ignore: non_constant_identifier_names
+  dynamic dataset;
 
-  late Map Response;
-
-   Future Getrates() async {
+  Future Getrate() async {
     var response = await http.get(Uri.parse(url));
+    var data = json.decode(response.body);
+
     if (response.statusCode == 200) {
-      Map<String, dynamic> Response = json.decode(response.body);
-      List<dynamic> rates = Response['USD'];
+      print(data);
+      setState(() {
+        dataset = '${data['USD']['buy']}';
+        print(dataset.toString());
+      });
+    } else {
+      print(response.statusCode);
     }
   }
 
   @override
   void initState() {
     //var fetchrates = Fetchrates();
+    Getrate();
     super.initState();
-    Getrates();
   }
 
   @override
@@ -57,42 +62,46 @@ class _GlobalratesState extends State<Globalrates> {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    Getrates();
+                    Getrate();
                   },
                   child: Container(
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '1 BTC = ',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 30,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            dataset == null ? 'Loading...' : '$dataset USD',
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     height: 100,
                     width: MediaQuery.of(context).size.width - 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: FutureBuilder(
-                      future: Getrates(),
-                      builder: (context, AsyncSnapshot<dynamic> snapshot) {
-                        if (snapshot.hasData && ConnectionState ==  ConnectionState.done) {
-                          return Column(
-                            children: [
-                              Text(
-                                "${snapshot.data['USD']['15m']}",
-                                style: GoogleFonts.lato(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepPurpleAccent,
-                                ),
-                              ),
-                             
-                            ],
-                          );
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),
                   ),
                 ),
               ),
+
+              SizedBox(height: 20),
+
+              
             ],
           ),
         ),
