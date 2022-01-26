@@ -19,6 +19,8 @@ void main()  async{
  await Firebase.initializeApp();
  Directory myDir = await getTemporaryDirectory();
  String mypath= myDir.path;
+ Hive.init(mypath);
+ await Hive.openBox('WalletID');
 
 
   Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -26,7 +28,7 @@ void main()  async{
 
   runApp(const MyApp());
 
-  AwesomeNotifications().initialize("resource://drawable/lawson", [
+  AwesomeNotifications().initialize("resource://drawable/tlogo", [
     NotificationChannel(
       channelShowBadge: true,
       channelKey: "Basics",

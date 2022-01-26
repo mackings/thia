@@ -1,4 +1,4 @@
-package com.example.thiago_exchange
+package myapp.example.thiago_exchange
 
 import io.flutter.embedding.android.FlutterActivity
 

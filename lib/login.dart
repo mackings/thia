@@ -18,14 +18,7 @@ class _LoginState extends State<Login> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   var _formKey = GlobalKey<FormState>();
-  bool visible = true;
-  bool notVisible = false;
-  void showpass(){
-    setState(() {
-      visible = !visible;
-      notVisible = !notVisible;
-    });
-  }
+  bool visible = false;
 
   //you can use this to check if the user is logged in
 
@@ -95,13 +88,13 @@ class _LoginState extends State<Login> {
             ),
             content: Text(
               e.message,
-              style:  GoogleFonts.montserrat(),
+              style: GoogleFonts.montserrat(),
             ),
             actions: <Widget>[
               FlatButton(
                 child: Text(
                   'Close',
-                  style:  GoogleFonts.montserrat(),
+                  style: GoogleFonts.montserrat(),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -142,7 +135,6 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 40,
                           ),
-
                           Text(
                             "Hello User",
                             style: GoogleFonts.montserrat(
@@ -150,8 +142,7 @@ class _LoginState extends State<Login> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-
-                           SizedBox(
+                          SizedBox(
                             height: 10,
                           ),
                           Text(
@@ -161,16 +152,12 @@ class _LoginState extends State<Login> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                           SizedBox(
+                          SizedBox(
                             height: 20,
                           ),
-
-
-
-
                           Container(
-                             height: MediaQuery.of(context).size.height /12,
-                             width: MediaQuery.of(context).size.width - 25,
+                            height: MediaQuery.of(context).size.height / 12,
+                            width: MediaQuery.of(context).size.width - 25,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -190,11 +177,11 @@ class _LoginState extends State<Login> {
                                       _emailController.text = value!;
                                     });
                                   },
-                                  controller: _emailController,style: GoogleFonts.montserrat(),
+                                  controller: _emailController,
+                                  style: GoogleFonts.montserrat(),
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: " Enter Email",
-                                    
                                     errorStyle: GoogleFonts.montserrat(
                                         color: Colors.deepPurpleAccent),
                                     hintStyle: GoogleFonts.montserrat(
@@ -215,8 +202,8 @@ class _LoginState extends State<Login> {
                             height: 20,
                           ),
                           Container(
-                              height: MediaQuery.of(context).size.height /12,
-                              width: MediaQuery.of(context).size.width - 25,
+                            height: MediaQuery.of(context).size.height / 12,
+                            width: MediaQuery.of(context).size.width - 25,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -236,27 +223,33 @@ class _LoginState extends State<Login> {
                                       _passwordController.text = value!;
                                     });
                                   },
-                                  controller: _passwordController,style: GoogleFonts.montserrat(),
-                                  obscureText: notVisible,
+                                  controller: _passwordController,
+                                  style: GoogleFonts.montserrat(),
+                                  obscureText: visible,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: " Enter Password",
                                     errorStyle: GoogleFonts.montserrat(
                                         color: Colors.deepPurpleAccent),
                                     hintStyle: GoogleFonts.montserrat(
-                                      color: Colors.black,
-                                      fontSize:18 
-                                    ),
+                                        color: Colors.black, fontSize: 18),
                                     suffixIcon: GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          
+                                          visible = !visible;
                                         });
+                                      
+                                        
                                       },
                                       child: Icon(
-                                        Icons.lock_open,
-                                        color: Colors.black,
-                                        size: 30,
+                                        visible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                            color: Colors.black,
+                                            size: 30,
+                                        //Icons.lock_open,
+                                        //color: Colors.black,
+                                       // size: 30,
                                       ),
                                     ),
                                   ),
@@ -301,7 +294,7 @@ class _LoginState extends State<Login> {
                               }
                             },
                             child: Container(
-                               height: MediaQuery.of(context).size.height /12,
+                              height: MediaQuery.of(context).size.height / 12,
                               width: MediaQuery.of(context).size.width - 25,
                               decoration: BoxDecoration(
                                 color: Colors.black,
@@ -324,10 +317,8 @@ class _LoginState extends State<Login> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white
-                                    ),
+                                    Icon(Icons.arrow_forward,
+                                        color: Colors.white),
                                   ],
                                 ),
                               ),

@@ -8,8 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 
-
-
 class Admin extends StatefulWidget {
   const Admin({Key? key}) : super(key: key);
 
@@ -28,40 +26,47 @@ class _AdminState extends State<Admin> {
   TextEditingController debitref = TextEditingController();
   TextEditingController balancecontroller = TextEditingController();
 
-  final balanceurl = ("https://sandbox.wallets.africa/wallet/balance");
-  final crediturl = ("https://sandbox.wallets.africa/wallet/credit");
-  final debiturl = ("https://sandbox.wallets.africa/wallet/debit");
+  // final balanceurl = ("https://sandbox.wallets.africa/wallet/balance");
+  //final crediturl = ("https://sandbox.wallets.africa/wallet/credit");
+  //final debiturl = ("https://sandbox.wallets.africa/wallet/debit");
+
+  var fundurl = 'https://api.getwallets.co/v1/wallets/funds/manual';
+  var debiturl = 'https://api.getwallets.co/v1/wallets/debit/manual';
+  var cbalanceurl = 'https://api.getwallets.co/v1/wallets/';
+  var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
 
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
 
   dynamic alldata;
   dynamic walletBalance;
+  dynamic result;
+  dynamic walletdata;
 
-  Future getuserbalance() async {
-    var response = await http.post(
+  Future Fetchuserbalance() async {
+    var balanceurl =
+        ('https://api.getwallets.co/v1/wallets/${balancecontroller.text}');
+
+    var response = await http.get(
       Uri.parse(balanceurl),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
+        //"Accept": "application/json",
+        "Authorization": "Bearer $getbearer",
       },
-      body: jsonEncode(
-        {
-          "phoneNumber": admincontroller.text,
-          "secretKey": 'hfucj5jatq8h',
-          "currency": "NGN",
-        },
-      ),
     );
 
     if (response.statusCode == 200) {
-      var data = json.decode(response.body)['data'];
+      walletdata = json.decode(response.body);
+      //print(walletdata["data"]['balances'][0]['balance']);
+
       setState(() {
-        walletBalance = '${data['walletBalance']}';
+        walletBalance = '${walletdata['data']['balances'][0]['balance']}';
       });
+
+      // print('user balance is $walletBalance');
     } else {
-      throw Exception('Failed to load post');
+      print(response.statusCode);
     }
   }
 
@@ -74,144 +79,63 @@ class _AdminState extends State<Admin> {
     //print(prefs.getString('walletBalance' + 'From SharedPreferences'));
   }
 
-  Credituser() async {
-    var credit = await http.post(
-      Uri.parse(crediturl),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
-      },
-      body: jsonEncode(
-        {
-          "transactionReference": transactionref.text,
-          "amount": 1000.0,
-          "phoneNumber": creditnumcontroller.text,
-          "secretKey": "hfucj5jatq8h"
+  Future fwallet() async {
+    var response = await http.post(Uri.parse(fundurl),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
         },
-      ),
-    );
-
-    if (credit.statusCode == 200) {
-      var data = json.decode(credit.body)['data'];
-      print(data);
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text(
-                  'User Credited Successfully',
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                actions: [
-                  FlatButton(
-                    child: Text(
-                      'okay',
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ));
-    } else {
-      print(credit.statusCode);
-
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text(
-                  'Transaction Failed',
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                actions: [
-                  FlatButton(
-                    child: Text(
-                      'Retry',
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Credituser();
-                    },
-                  ),
-                ],
-              ));
-    }
-  }
-
-  Future Debituser() async {
-    var debit = await http.post(
-      Uri.parse(debiturl),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
-      },
-      body: jsonEncode(
-        {
-          "transactionReference": debitref.text,
-          "amount": 100.0,
-          "phoneNumber": debitnumcontroller.text,
-          "secretKey": "hfucj5jatq8h"
-        },
-      ),
-    );
-
-    if (debit.statusCode == 200) {
-      var data = json.decode(debit.body)['data'];
-      print(data);
-    }
-  }
-
-  Future Fetchuserbalance() async {
-    var response = await http.post(
-      Uri.parse(balanceurl),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
-      },
-      body: jsonEncode(
-        {
-          "phoneNumber": balancecontroller.text,
-          "secretKey": 'hfucj5jatq8h',
-          "currency": "NGN",
-        },
-      ),
-    );
+        //body
+        body: jsonEncode({
+          'wallet_id': creditnumcontroller.text,
+          'amount': 1000,
+          'currency': 'NGN',
+        }));
 
     if (response.statusCode == 200) {
-      var data = json.decode(response.body)['data'];
+      result = json.decode(response.body);
+
+      print(result);
+
       setState(() {
-        walletBalance = '${data['walletBalance']}';
+        // demwallet = '${result['data']['wallet_id']}';
+        //  dembalance = '${result['data']['balance']}';
       });
+      // print(demwallet);
+      // print('user balance is $dembalance');
     } else {
-      throw Exception('Failed to load post');
+      throw Exception('Failed ');
+    }
+  }
+
+  Future dwallet() async {
+    var response = await http.post(Uri.parse(debiturl),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        },
+        //body
+        body: jsonEncode({
+          'wallet_id': debitnumcontroller.text,
+          'amount': 1000,
+          'currency': 'NGN',
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+
+      print(result);
+
+      setState(() {
+        // demwallet = '${result['data']['wallet_id']}';
+        //  dembalance = '${result['data']['balance']}';
+      });
+      // print(demwallet);
+      // print('user balance is $dembalance');
+    } else {
+      print(response.statusCode);
     }
   }
 
@@ -219,8 +143,8 @@ class _AdminState extends State<Admin> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getuserbalance();
-    Debituser();
+    Fetchuserbalance();
+    dwallet();
     Fetchuserbalance();
   }
 
@@ -233,7 +157,6 @@ class _AdminState extends State<Admin> {
           child: Center(
             child: Column(
               children: [
-               
                 //starboy
 
                 SizedBox(
@@ -258,7 +181,6 @@ class _AdminState extends State<Admin> {
                       hintText: 'Enter User Wallet ID',
                       hintStyle: TextStyle(
                         color: Colors.white,
-                      
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -334,7 +256,19 @@ class _AdminState extends State<Admin> {
                         fontSize: 16.0,
                       );
                     } else {
-                      Credituser();
+                      //Credituser();
+                      fwallet().whenComplete(() => showDialog(context: context, builder: (context) => AlertDialog(
+                        title: Text('Transaction Successful'),
+                        content: Text('User has been credited'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      )));
                     }
                   },
                   child: Container(
@@ -478,7 +412,7 @@ class _AdminState extends State<Admin> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Debituser().then((value) => {
+                                      dwallet().then((value) => {
                                             Navigator.pop(context),
                                             Fluttertoast.showToast(
                                               msg: "User Debit Successfully",

@@ -27,7 +27,7 @@ class _Intro1State extends State<Intro1> {
     _mycontroller.initialize().then((_) {
       _mycontroller.play();
       _mycontroller.setLooping(true);
-      Timer(Duration(seconds: 10), () => _mycontroller.pause());
+      Timer(Duration(seconds: 23), () => _mycontroller.pause());
 
       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
       setState(() {});

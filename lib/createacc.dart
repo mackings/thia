@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
+import 'package:supabase/supabase.dart';
 import 'package:thiago_exchange/login.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -35,115 +38,112 @@ class _CreateAccState extends State<CreateAcc> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-   final Walleturl = ("https://sandbox.wallets.africa/wallet/generate");
-  final secret = ('hfucj5jatq8h');
-  String bearer = ('uvjqzm5xl6bw');
+  String Walleturl = ("https://api.getwallets.co/v1/wallets");
+  //final secret = ('hfucj5jatq8h');
+  //String bearer = ('uvjqzm5xl6bw');yo
 
   dynamic WalletID;
 
+  var walletcreate = 'https://api.getwallets.co/v1/wallets';
+  var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
+  dynamic result;
+  dynamic dembalance;
+  dynamic demwallet;
+  dynamic defaultid;
+  dynamic defaultbalance;
+  dynamic FsWalletID;
+  dynamic FsWalletBalance;
 
-
-  Future Createwallet() async {
-
-    final response = await http.post(
-      Uri.parse(Walleturl),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
-      },
-      body: jsonEncode(
-        {
-          
-  "firstName": _fullnameController.text,
-  "lastName": _fullnameController.text,  
-  "Bvn":_phonenumber.text, 
-  "email": _emailController.text,  
-  "secretKey": secret,
-  "dateOfBirth": "1946-01-12",
-  "phoneNumber": 0000000000,
-  "password": _passwordController.text,
-  "currency": "NGN"
-          
-          
-      
-          
+  Future cwallet() async {
+    var response = await http.post(Uri.parse(walletcreate),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
         },
-      ),
-    );
+        //body
+        body: jsonEncode({'customer_email': _emailController.text}));
+
     if (response.statusCode == 200) {
-      var responseJson = json.decode(response.body);
+      result = json.decode(response.body);
+
+      print(result);
+
       setState(() {
-        WalletID = responseJson['data']['phoneNumber'];
+        demwallet = '${result['data']['wallet_id']}';
+        dembalance = '${result['data']['balance']}';
+        defaultid = demwallet;
+        defaultbalance = dembalance;
       });
 
-     
+      SaveIdtoFirestore();
+      SavetoHive();
+      
+
+      print(demwallet);
+      print('user balance is $defaultbalance');
     } else {
-      print(response.statusCode);
-      print(bearer);
+      throw Exception('Failed ');
     }
-
-
-    
-    var walletbox = Hive.box('user');
-    await walletbox.put('walletid', WalletID).whenComplete(() => print("Hive saved" + WalletID));
-
-    //print(response.body);
   }
-
-
-
-
-
-
-
 
   storeuserdetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('email', _emailController.text);
     prefs.setString('password', _passwordController.text);
     prefs.setString('fullname', _fullnameController.text);
-    prefs.setString('phonenumber', _phonenumber.text);
-    prefs.setString('btcaddress', _Btccontroller.text);
+    prefs.setString('walletid', demwallet);
+    prefs.setString('walletbalance', defaultbalance);
 
     //FirebaseFirestore.instance
     //    .collection('users')
-     //   .doc(_emailController.text)
-     //   .set({
-     // 'email': _emailController.text,
-     // 'password': _passwordController.text,
-     // 'fullname': _fullnameController.text,
+    //   .doc(_emailController.text)
+    //   .set({
+    // 'email': _emailController.text,
+    // 'password': _passwordController.text,
+    // 'fullname': _fullnameController.text,
     //  'phonenumber': _phonenumber.text,
-   //   'btcaddress': _Btccontroller.text,
-   // });
+    //   'btcaddress': _Btccontroller.text,
+    // });
 
-     FirebaseFirestore.instance.collection(" Registered Users").add({
-                        "Account Name":_fullnameController.text,
-                        "Email Address": _emailController.text,
-                        "BTC Wallet":_Btccontroller.text,
-                        "Phone Number": _phonenumber.text,
-                        "Date Added": DateTime.now(),
-                      });
+    FirebaseFirestore.instance.collection(" Registered Users").add({
+      "Account Name": _fullnameController.text,
+      "Email Address": _emailController.text,
+      "BTC Wallet": _Btccontroller.text,
+      "Phone Number": _phonenumber.text,
+      "Date Added": DateTime.now(),
+    });
 
-
-    print(prefs.getString('email'));
-   
+    var userid = prefs.getString('walletid');
+    var userbalance = prefs.getString('walletbalance');
+    print('prefs is $userid');
+    print('prefs is $userbalance');
   }
 
   Createuser() async {
     _auth
         .createUserWithEmailAndPassword(
-            email: _emailController.text.trim(), password: _passwordController.text.trim())
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim())
         .then((user) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Success",style: GoogleFonts.montserrat(),),
-              content: Text("Account created successfully",style: GoogleFonts.montserrat(),),
+              title: Text(
+                "Success",
+                style: GoogleFonts.montserrat(),
+              ),
+              content: Text(
+                "Account created successfully",
+                style: GoogleFonts.montserrat(),
+              ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("OK",style: GoogleFonts.montserrat(),),
+                  child: Text(
+                    "OK",
+                    style: GoogleFonts.montserrat(),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -156,11 +156,17 @@ class _CreateAccState extends State<CreateAcc> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Error ",style: GoogleFonts.montserrat(),),
+              title: Text(
+                "Error ",
+                style: GoogleFonts.montserrat(),
+              ),
               content: Text(e.message),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("OK",style: GoogleFonts.montserrat(),),
+                  child: Text(
+                    "OK",
+                    style: GoogleFonts.montserrat(),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -171,6 +177,57 @@ class _CreateAccState extends State<CreateAcc> {
     });
   }
 
+  SavetoHive() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', _emailController.text);
+    prefs.setString('password', _passwordController.text);
+    prefs.setString('fullname', _fullnameController.text);
+    prefs.setString('walletid', defaultid);
+    prefs.setString('walletbalance', defaultbalance);
+  }
+
+  SaveIdtoFirestore() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUseruser = await _auth.currentUser!.email;
+    await FirebaseFirestore.instance
+        .collection('wallets')
+        .doc(FirebaseUseruser)
+        .set({
+      'walletid': defaultid ?? '',
+      'balance': defaultbalance ?? '',//changedfrom dembalance
+    }).whenComplete(() {
+       print('Firestore wallet is $demwallet');
+       print('Firestore balance is $dembalance');
+      GetWalletidandbalance();
+    });
+
+    print('Firestore wallet is $demwallet');
+    print('Firestore balance is $dembalance');
+  }
+
+  var walletdetails = FirebaseFirestore.instance.collection('wallets');
+   Future GetWalletidandbalance() async {
+    return await walletdetails.doc(_emailController.text).get().then((value) {
+      setState(() {
+        FsWalletID = value.data()!['walletid'];
+        FsWalletBalance = value.data()!['balance'];
+
+      });
+
+      
+        print('Firestore Got  the $FsWalletID');
+        print('Firestore Got  the $FsWalletBalance');
+    });
+
+    
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //cwallet();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,10 +258,10 @@ class _CreateAccState extends State<CreateAcc> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /12,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -226,7 +283,6 @@ class _CreateAccState extends State<CreateAcc> {
                               hintText: " Enter Full Name",
                               hintStyle: GoogleFonts.montserrat(
                                 color: Colors.black,
-
                               ),
                               suffixIcon: Icon(
                                 Icons.account_circle,
@@ -240,45 +296,11 @@ class _CreateAccState extends State<CreateAcc> {
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height /12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: _Btccontroller,
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 10) {
-                                return 'Please enter your BTC Address';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: " Enter BTC Address",
-                              hintStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                              ),
-                              suffixIcon: Icon(
-                                Icons.qr_code,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+
                     //yeah
-                    SizedBox(
-                      height: 20,
-                    ),
+
                     Container(
-                       height: MediaQuery.of(context).size.height /12,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -290,7 +312,7 @@ class _CreateAccState extends State<CreateAcc> {
                           child: TextFormField(
                             controller: _emailController,
                             validator: (value) {
-                              if (value!.isEmpty ){
+                              if (value!.isEmpty) {
                                 return 'Please enter a valid email';
                               }
                               return null;
@@ -314,7 +336,7 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /12,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -351,7 +373,7 @@ class _CreateAccState extends State<CreateAcc> {
                       height: 20,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height /12,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -384,13 +406,13 @@ class _CreateAccState extends State<CreateAcc> {
                         ),
                       ),
                     ),
-        
+
                     SizedBox(
                       height: 20,
                     ),
-        
+
                     Container(
-                    height: MediaQuery.of(context).size.height /12,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -400,7 +422,8 @@ class _CreateAccState extends State<CreateAcc> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: _confirmpasswordController,style: GoogleFonts.montserrat(
+                            controller: _confirmpasswordController,
+                            style: GoogleFonts.montserrat(
                               color: Colors.black,
                             ),
                             validator: (value) {
@@ -427,10 +450,10 @@ class _CreateAccState extends State<CreateAcc> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Container(
-                       height: MediaQuery.of(context).size.height /12,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width - 25,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -444,16 +467,19 @@ class _CreateAccState extends State<CreateAcc> {
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
-        
+
+                                  // cwallet();
                                   Createuser();
+                                  cwallet();
                                   storeuserdetails();
-                                 // Notify();
+                                  SavetoHive();
+                                  // Notify();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Login()));
                                 } else {}
-        
+
                                 //Createaccount();
                                 //Notify();
                                 // Navigator.push(
