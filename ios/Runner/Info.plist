@@ -7,8 +7,19 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>NSAppTransportSecurity</key>
+	<key>NSAppTransportSecurity</key>
 <dict>
+  <key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    <key>NSAllowsArbitraryLoadsInWebContent</key>
+    <true/>
+</dict>
   <key>NSAllowsArbitraryLoads</key>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <key>NSCameraUsageDescription</key>
+  <key>NSMicrophoneUsageDescription</key>
   <true/>
 </dict>
 	<key>CFBundleIdentifier</key>
