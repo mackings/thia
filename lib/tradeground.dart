@@ -179,7 +179,7 @@ class _TradeGroundState extends State<TradeGround> {
     }
   }
 
-  //id
+  //dialogs
 
   iddialog() {
     showDialog(
