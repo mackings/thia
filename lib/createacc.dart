@@ -39,6 +39,7 @@ class _CreateAccState extends State<CreateAcc> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String Walleturl = ("https://api.getwallets.co/v1/wallets");
+
   //final secret = ('hfucj5jatq8h');
   //String bearer = ('uvjqzm5xl6bw');yo
 
@@ -78,7 +79,6 @@ class _CreateAccState extends State<CreateAcc> {
 
       SaveIdtoFirestore();
       SavetoHive();
-      
 
       print(demwallet);
       print('user balance is $defaultbalance');
@@ -194,10 +194,10 @@ class _CreateAccState extends State<CreateAcc> {
         .doc(FirebaseUseruser)
         .set({
       'walletid': defaultid ?? '',
-      'balance': defaultbalance ?? '',//changedfrom dembalance
+      'balance': defaultbalance ?? '', //changedfrom dembalance
     }).whenComplete(() {
-       print('Firestore wallet is $demwallet');
-       print('Firestore balance is $dembalance');
+      print('Firestore wallet is $demwallet');
+      print('Firestore balance is $dembalance');
       GetWalletidandbalance();
     });
 
@@ -206,20 +206,17 @@ class _CreateAccState extends State<CreateAcc> {
   }
 
   var walletdetails = FirebaseFirestore.instance.collection('wallets');
-   Future GetWalletidandbalance() async {
+
+  Future GetWalletidandbalance() async {
     return await walletdetails.doc(_emailController.text).get().then((value) {
       setState(() {
         FsWalletID = value.data()!['walletid'];
         FsWalletBalance = value.data()!['balance'];
-
       });
 
-      
-        print('Firestore Got  the $FsWalletID');
-        print('Firestore Got  the $FsWalletBalance');
+      print('Firestore Got  the $FsWalletID');
+      print('Firestore Got  the $FsWalletBalance');
     });
-
-    
   }
 
   @override
@@ -231,283 +228,281 @@ class _CreateAccState extends State<CreateAcc> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.deepPurpleAccent,
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 70,
-                    ),
-                    Center(
-                      child: Text(
-                        "Create Your Account",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 70,
+                  ),
+                  Center(
+                    child: Text(
+                      "Create Your Account",
+                      style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: _fullnameController,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your full name';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: " Enter Full Name",
-                              hintStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                              ),
-                              suffixIcon: Icon(
-                                Icons.account_circle,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
                     ),
-                    SizedBox(
-                      height: 20,
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width - 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-
-                    //yeah
-
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: _emailController,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: " Enter Your Email",
-                              hintStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                              ),
-                              suffixIcon: Icon(
-                                Icons.alternate_email,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: _phonenumber,
-                            validator: (value) {
-                              if (value!.isEmpty || value.length > 11) {
-                                return 'Please enter your phone number';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: " Enter Your Phone Number",
-                              hintStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                              ),
-                              suffixIcon: Icon(
-                                Icons.phone,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: _passwordController,
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 6) {
-                                return 'Please enter a Strong Password';
-                              }
-                              return null;
-                            },
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: " Enter Your Password",
-                              hintStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                              ),
-                              suffixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: _confirmpasswordController,
-                            style: GoogleFonts.montserrat(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _fullnameController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your full name';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: " Enter Full Name",
+                            hintStyle: GoogleFonts.montserrat(
                               color: Colors.black,
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty ||
-                                  value != _passwordController.text) {
-                                return 'Passwords Do not Match';
-                              }
-                              return null;
-                            },
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: " Confirm Your Password",
-                              hintStyle: GoogleFonts.montserrat(
-                                color: Colors.black,
-                              ),
-                              suffixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.black,
-                              ),
+                            suffixIcon: Icon(
+                              Icons.account_circle,
+                              color: Colors.black,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 40,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  //yeah
+
+                  Container(
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width - 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width - 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _emailController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: " Enter Your Email",
+                            hintStyle: GoogleFonts.montserrat(
+                              color: Colors.black,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.alternate_email,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  _formKey.currentState!.save();
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width - 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _phonenumber,
+                          validator: (value) {
+                            if (value!.isEmpty || value.length > 11) {
+                              return 'Please enter your phone number';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: " Enter Your Phone Number",
+                            hintStyle: GoogleFonts.montserrat(
+                              color: Colors.black,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.phone,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width - 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value!.isEmpty || value.length < 6) {
+                              return 'Please enter a Strong Password';
+                            }
+                            return null;
+                          },
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: " Enter Your Password",
+                            hintStyle: GoogleFonts.montserrat(
+                              color: Colors.black,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
 
-                                  // cwallet();
-                                  Createuser();
-                                  cwallet();
-                                  storeuserdetails();
-                                  SavetoHive();
-                                  // Notify();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
-                                } else {}
+                  SizedBox(
+                    height: 20,
+                  ),
 
-                                //Createaccount();
-                                //Notify();
-                                // Navigator.push(
-                                //   context,
-                                // MaterialPageRoute(
-                                //     builder: (context) => Login()));
-                              },
-                              child: Text(
-                                "Create Account",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width - 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _confirmpasswordController,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.black,
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                value != _passwordController.text) {
+                              return 'Passwords Do not Match';
+                            }
+                            return null;
+                          },
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: " Confirm Your Password",
+                            hintStyle: GoogleFonts.montserrat(
+                              color: Colors.black,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width - 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+
+                                // cwallet();
+                                Createuser();
+                                cwallet();
+                                storeuserdetails();
+                                SavetoHive();
+                                // Notify();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Login()));
+                              } else {}
+
+                              //Createaccount();
+                              //Notify();
+                              // Navigator.push(
+                              //   context,
+                              // MaterialPageRoute(
+                              //     builder: (context) => Login()));
+                            },
+                            child: Text(
+                              "Create Account",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Icon(Icons.arrow_forward),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(Icons.arrow_forward),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

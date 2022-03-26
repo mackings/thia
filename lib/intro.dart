@@ -37,30 +37,28 @@ class _Intro1State extends State<Intro1> {
   }
 
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-            backgroundColor: Colors.deepPurpleAccent,
-            body: Stack(
-              children: [
-                SizedBox.expand(
-                  child: FittedBox(
-                    fit: BoxFit.fill,
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.deepPurpleAccent,
+          body: Stack(
+            children: [
+              SizedBox.expand(
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: SizedBox(
+                    width: _mycontroller.value.size.width,
+                    height: _mycontroller.value.size.height,
                     child: SizedBox(
                       width: _mycontroller.value.size.width,
                       height: _mycontroller.value.size.height,
-                      child: SizedBox(
-                        width: _mycontroller.value.size.width,
-                        height: _mycontroller.value.size.height,
-                        child: VideoPlayer(_mycontroller),
-                      ),
+                      child: VideoPlayer(_mycontroller),
                     ),
                   ),
                 ),
-                Enter(),
-              ],
-            )),
-      ),
+              ),
+              Enter(),
+            ],
+          )),
     );
   }
 
@@ -132,8 +130,8 @@ class _EnterState extends State<Enter> {
                   MaterialPageRoute(builder: (context) => CreateAcc()));
             },
             child: Container(
-              height: MediaQuery.of(context).size.height / 12, 
-                width: MediaQuery.of(context).size.width -40,
+              height: MediaQuery.of(context).size.height / 12,
+              width: MediaQuery.of(context).size.width - 40,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -162,8 +160,8 @@ class _EnterState extends State<Enter> {
                     context, MaterialPageRoute(builder: (context) => Login()));
               },
               child: Container(
-                height: MediaQuery.of(context).size.height / 12, 
-                width: MediaQuery.of(context).size.width -40,
+                height: MediaQuery.of(context).size.height / 12,
+                width: MediaQuery.of(context).size.width - 40,
                 //width: 300,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,

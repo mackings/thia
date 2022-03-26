@@ -19,6 +19,7 @@ class _WithdrawsState extends State<Withdraws> {
   final usermail = FirebaseAuth.instance.currentUser!.email;
 
   dynamic result;
+
   Future mailgun() async {
     var response = await http.post(Uri.parse(emailapiurl),
         headers: {
@@ -47,221 +48,219 @@ class _WithdrawsState extends State<Withdraws> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.deepPurpleAccent,
-        body: SingleChildScrollView(
-          child: Column(children: <Widget>[
-            SizedBox(
-              height: 70,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //Icon(Icons.arrow_back_ios,color: Colors.white,),
-                Text("Withdraw Funds",
-                    style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Center(
-                child: Text(
-                  "Note 1:  Withdrawals from your accounts would automatically sent a Withdraw request ",
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: SingleChildScrollView(
+        child: Column(children: <Widget>[
+          SizedBox(
+            height: 70,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //Icon(Icons.arrow_back_ios,color: Colors.white,),
+              Text("Withdraw Funds",
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
+                  )),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Center(
+              child: Text(
+                "Note 1:  Withdrawals from your accounts would automatically sent a Withdraw request ",
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Center(
-                child: Text(
-                  "Note 2 : There would be no reverse of any withdraw requests to your account unless there is a glitch  ",
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Center(
+              child: Text(
+                "Note 2 : There would be no reverse of any withdraw requests to your account unless there is a glitch  ",
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Center(
+              child: Text(
+                "Note 3 :  You are free to contact the support Team for anhy kind of Assistance and   Help as it is Free",
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height / 12,
+            width: MediaQuery.of(context).size.width - 25,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: _amount,
+                  validator: (value) {
+                    if (value!.isEmpty || value.length < 15) {
+                      return 'Please enter Withdraw Amount';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: " Enter Wallet Amount",
+                    hintStyle: GoogleFonts.montserrat(
+                      color: Colors.black,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.monetization_on,
+                      color: Colors.black,
                     ),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Center(
-                child: Text(
-                  "Note 3 :  You are free to contact the support Team for anhy kind of Assistance and   Help as it is Free",
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height / 12,
+            width: MediaQuery.of(context).size.width - 25,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: _controller,
+                  validator: (value) {
+                    if (value!.isEmpty || value.length < 15) {
+                      return 'Please enter Withdraw Amount';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: " Enter Wallet Address",
+                    hintStyle: GoogleFonts.montserrat(
+                      color: Colors.black,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.qr_code,
+                      color: Colors.black,
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height / 12,
-              width: MediaQuery.of(context).size.width - 25,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _amount,
-                    validator: (value) {
-                      if (value!.isEmpty || value.length < 15) {
-                        return 'Please enter Withdraw Amount';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: " Enter Wallet Amount",
-                      hintStyle: GoogleFonts.montserrat(
-                        color: Colors.black,
-                      ),
-                      suffixIcon: Icon(
-                        Icons.monetization_on,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height / 12,
-              width: MediaQuery.of(context).size.width - 25,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _controller,
-                    validator: (value) {
-                      if (value!.isEmpty || value.length < 15) {
-                        return 'Please enter Withdraw Amount';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: " Enter Wallet Address",
-                      hintStyle: GoogleFonts.montserrat(
-                        color: Colors.black,
-                      ),
-                      suffixIcon: Icon(
-                        Icons.qr_code,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: () {
-                mailgun().whenComplete(() => showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: Text(
-                            "Withdraw Request Sent",
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          GestureDetector(
+            onTap: () {
+              mailgun().whenComplete(() => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: Text(
+                          "Withdraw Request Sent",
+                          style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          content: Text(
-                            "Your Withdraw Request has been sent to the Admin",
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        ),
+                        content: Text(
+                          "Your Withdraw Request has been sent to the Admin",
+                          style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          actions: [
-                            FlatButton(
-                              child: Text(
-                                "OK",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        ),
+                        actions: [
+                          FlatButton(
+                            child: Text(
+                              "OK",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Withdraws()));
-                              },
-                            )
-                          ],
-                        )));
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.height - 640,
-                width: MediaQuery.of(context).size.width - 20,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Text(
-                    ' Withdraw ',
-                    style: GoogleFonts.montserrat(
-                      textStyle: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Withdraws()));
+                            },
+                          )
+                        ],
+                      )));
+            },
+            child: Container(
+              height: MediaQuery.of(context).size.height - 640,
+              width: MediaQuery.of(context).size.width - 20,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  ' Withdraw ',
+                  style: GoogleFonts.montserrat(
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
             ),
-          ]),
-        ),
+          ),
+        ]),
       ),
     );
   }

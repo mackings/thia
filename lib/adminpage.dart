@@ -150,396 +150,396 @@ class _AdminState extends State<Admin> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.deepPurpleAccent,
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                //starboy
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              //starboy
 
-                SizedBox(
-                  height: 90,
+              SizedBox(
+                height: 90,
+              ),
+              Text(
+                'CREDIT USER',
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                Text(
-                  'CREDIT USER',
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 20,
+              ),
+
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: creditnumcontroller,
+                  decoration: InputDecoration(
+                    hintText: 'Enter User Wallet ID',
+                    hintStyle: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                 ),
+              ),
 
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: creditnumcontroller,
-                    decoration: InputDecoration(
-                      hintText: 'Enter User Wallet ID',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
+              SizedBox(
+                height: 5,
+              ),
 
-                SizedBox(
-                  height: 5,
-                ),
-
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: transactionref,
-                    decoration: InputDecoration(
-                      hintText: 'EnterTranction Reference',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: creditamountcontroller,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Amount',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-
-                GestureDetector(
-                  onTap: () {
-                    if (creditnumcontroller.text.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "Please Enter Wallet ID",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    } else if (creditamountcontroller.text.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "Please Enter Amount",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    } else {
-                      //Credituser();
-                      fwallet().whenComplete(() => showDialog(context: context, builder: (context) => AlertDialog(
-                        title: Text('Transaction Successful'),
-                        content: Text('User has been credited'),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text('OK'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      )));
-                    }
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height - 640,
-                    width: MediaQuery.of(context).size.width - 40,
-                    decoration: BoxDecoration(
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: transactionref,
+                  decoration: InputDecoration(
+                    hintText: 'EnterTranction Reference',
+                    hintStyle: TextStyle(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
-                      child: Text('CREDIT ',
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                 ),
-
-                SizedBox(
-                  height: 30,
-                ),
-
-                //debit
-                Text(
-                  'DEBIT USER',
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 20,
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: creditamountcontroller,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Amount',
+                    hintStyle: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                 ),
+              ),
 
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: debitref,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Reference number',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
+              GestureDetector(
+                onTap: () {
+                  if (creditnumcontroller.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Please Enter Wallet ID",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  } else if (creditamountcontroller.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Please Enter Amount",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  } else {
+                    //Credituser();
+                    fwallet().whenComplete(() => showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              title: Text('Transaction Successful'),
+                              content: Text('User has been credited'),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            )));
+                  }
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height - 640,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text('CREDIT ',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                   ),
                 ),
+              ),
 
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: debitnumcontroller,
-                    decoration: InputDecoration(
-                      hintText: 'Enter User Wallet ID',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
+              SizedBox(
+                height: 30,
+              ),
 
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: debitamountcontroller,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Amount',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
+              //debit
+              Text(
+                'DEBIT USER',
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: debitref,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Reference number',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    if (debitnumcontroller.text.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "Please Enter Phone Number",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    } else if (debitamountcontroller.text.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "Please Enter Amount",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text(
-                                  'Are you sure you want to Debit this user?',
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+              ),
+
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: debitnumcontroller,
+                  decoration: InputDecoration(
+                    hintText: 'Enter User Wallet ID',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: debitamountcontroller,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Amount',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  if (debitnumcontroller.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Please Enter Phone Number",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  } else if (debitamountcontroller.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Please Enter Amount",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              title: Text(
+                                'Are you sure you want to Debit this user?',
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                actions: [
-                                  FlatButton(
-                                    child: Text(
-                                      'Yes',
-                                      style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                              ),
+                              actions: [
+                                FlatButton(
+                                  child: Text(
+                                    'Yes',
+                                    style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      dwallet().then((value) => {
-                                            Navigator.pop(context),
-                                            Fluttertoast.showToast(
-                                              msg: "User Debit Successfully",
-                                              toastLength: Toast.LENGTH_LONG,
-                                              gravity: ToastGravity.BOTTOM,
-                                              timeInSecForIosWeb: 1,
-                                              backgroundColor: Colors.red,
-                                              textColor: Colors.white,
-                                              fontSize: 16.0,
-                                            )
-                                          });
-                                      // Navigator.pop(context);
-                                    },
                                   ),
-                                  FlatButton(
-                                    child: Text(
-                                      'No',
-                                      style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  onPressed: () {
+                                    dwallet().then((value) => {
+                                          Navigator.pop(context),
+                                          Fluttertoast.showToast(
+                                            msg: "User Debit Successfully",
+                                            toastLength: Toast.LENGTH_LONG,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor: Colors.red,
+                                            textColor: Colors.white,
+                                            fontSize: 16.0,
+                                          )
+                                        });
+                                    // Navigator.pop(context);
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text(
+                                    'No',
+                                    style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
                                   ),
-                                ],
-                              ));
-                    }
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height - 640,
-                    width: MediaQuery.of(context).size.width - 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text('DEBIT ',
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),
-                    ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            ));
+                  }
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height - 640,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text('DEBIT ',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                   ),
                 ),
+              ),
 
-                SizedBox(
-                  height: 30,
+              SizedBox(
+                height: 30,
+              ),
+
+              Text(
+                'VIEW USER BALANCE',
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-
-                Text(
-                  'VIEW USER BALANCE',
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 20,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                walletBalance == null ? '0' : walletBalance,
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: balancecontroller,
+                  decoration: InputDecoration(
+                    hintText: 'Enter User Wallet ID',
+                    hintStyle: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  walletBalance == null ? '0' : walletBalance,
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    controller: balancecontroller,
-                    decoration: InputDecoration(
-                      hintText: 'Enter User Wallet ID',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
+              ),
 
-                GestureDetector(
-                  onTap: () {
-                    Fetchuserbalance();
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height - 640,
-                    width: MediaQuery.of(context).size.width - 40,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text('View Balance ',
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),
-                    ),
+              GestureDetector(
+                onTap: () {
+                  Fetchuserbalance();
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height - 640,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text('View Balance ',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                   ),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+            ],
           ),
         ),
       ),

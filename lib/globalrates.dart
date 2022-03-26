@@ -74,160 +74,153 @@ class _GlobalratesState extends State<Globalrates> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.deepPurpleAccent,
-        body: Container(
-          child: Column(
-            children: [
-              SizedBox(height: 90),
-               Text("Global Rates ",
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold))),
-
-                          SizedBox(height: 20),
-             Padding(
-               padding: const EdgeInsets.all(15.0),
-               child: Center(
-                 child: Text("Global Rates are simply the general figures which are used to calculate the exchange rate of any currency to USD",
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: Container(
+        child: Column(
+          children: [
+            SizedBox(height: 90),
+            Text("Global Rates ",
+                style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold))),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Center(
+                child: Text(
+                    "Global Rates are simply the general figures which are used to calculate the exchange rate of any currency to USD",
                     style: GoogleFonts.montserrat(
                         textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold))),
-               ),
-             ),
-
-                          SizedBox(height: 40),
-
-
-
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    Getrate();
-                  },
-                  child: Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Buy BTC: ',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 20,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Container(
-                            height: 60,
-                            width: 180,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.deepPurpleAccent,
-                            ),
-                          
-                            child: Center(
-                              child: Text(
-                                dataset == null ? 'Loading...' : '$dataset USD',
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    height: 100,
-                    width: MediaQuery.of(context).size.width - 10,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
               ),
-              SizedBox(height: 20),
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    Getrate();
-                  },
-                  child: Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Sell BTC: ',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 20,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Container(
-                            height: 60,
-                            width: 180,
-                            decoration: BoxDecoration(
-                              color: Colors.deepPurpleAccent,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                dataset == null ? 'Loading...' : '$dataset USD',
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    height: 100,
-                    width: MediaQuery.of(context).size.width - 10,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
+            ),
+            SizedBox(height: 40),
+            Center(
+              child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TradeGround()));
+                  Getrate();
                 },
                 child: Container(
-                  height: MediaQuery.of(context).size.height - 630,
-                  width: MediaQuery.of(context).size.width - 30,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Buy BTC: ',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Container(
+                          height: 60,
+                          width: 180,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          child: Center(
+                            child: Text(
+                              dataset == null ? 'Loading...' : '$dataset USD',
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  height: 100,
+                  width: MediaQuery.of(context).size.width - 10,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Center(
-                      child: Text(
-                    "Trade with Thiago",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 20, color: Colors.black),
-                  )),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  Getrate();
+                },
+                child: Container(
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Sell BTC: ',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Container(
+                          height: 60,
+                          width: 180,
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurpleAccent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              dataset == null ? 'Loading...' : '$dataset USD',
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  height: 100,
+                  width: MediaQuery.of(context).size.width - 10,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TradeGround()));
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.height - 630,
+                width: MediaQuery.of(context).size.width - 30,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                    child: Text(
+                  "Trade with Thiago",
+                  style:
+                      GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
+                )),
+              ),
+            )
+          ],
         ),
       ),
     );

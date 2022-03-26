@@ -46,6 +46,7 @@ class _TradeGroundState extends State<TradeGround> {
 
   //Remote server
   RemoteConfig remoteConfig = RemoteConfig.instance;
+
   Future Activate() async {
     bool updated = await remoteConfig.fetchAndActivate();
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
@@ -213,682 +214,678 @@ class _TradeGroundState extends State<TradeGround> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.deepPurpleAccent,
-        key: _globalKey,
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                    color: Colors.deepPurpleAccent,
-                  ),
-                  child: Stack(children: <Widget>[
-                    Positioned(
-                        top: 62,
-                        left: 48.3457260131836,
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color.fromRGBO(81, 163, 163, 1),
-                                    width: 1,
-                                  ),
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/bitcoin.png'),
-                                      fit: BoxFit.fitWidth),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(80, 80)),
-                                )),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () => getuserbalance(),
-                                  child: Text(
-                                    "N $walletBalance",
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                GestureDetector(
-                                  onTap: () => iddialog(),
-                                  child: Icon(
-                                    Icons.visibility,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 168,
-                        left: 55.345726013183594,
-                        child: Row(
-                          children: [
-                            //textid
-                            Icon(Icons.account_balance_wallet,
-                                color: Colors.white, size: 30),
-
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Globalrates()));
-                              },
-                              child: GestureDetector(
-                                onTap: () {
-                                  Fetchuserbalance();
-                                },
-                                child: Text(
-                                  "View My ID",
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 210,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                iddialog();
-                              },
-                              child: Text(
-                                "$useremail",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 257,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.web,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Globalrates()));
-                              },
-                              child: Text(
-                                "Global Rates",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 200,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            // Icon(
-                            //  Icons.wallet_giftcard,
-                            //  color: Colors.white,
-                            // ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 298,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.help,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                _launchURL();
-                              },
-                              child: Text(
-                                "Help and Support",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 340,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.gamepad,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Games()));
-                              },
-                              child: Text(
-                                "Play Games",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Positioned(
-                        top: 380,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.help,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Withdraws()));
-                              },
-                              child: Text(
-                                "Withdraws",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 420,
-                        left: 58.345726013183594,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.lock,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Pass()));
-                              },
-                              child: Text(
-                                " Thiago Portal",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Positioned(
-                        top: 487,
-                        left: 55.345726013183594,
-                        child: Container(
-                            width: 156.1904754638672,
-                            height: 50,
-                            child: Stack(children: <Widget>[
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Login()));
-                                    },
-                                    child: Container(
-                                        width: 150,
-                                        height: 70,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.white,
-                                        ),
-                                        child: Stack(children: <Widget>[
-                                          Positioned(
-                                            top: 11,
-                                            left: 43,
-                                            child: Text(
-                                              "Logout ",
-                                              style: GoogleFonts.montserrat(
-                                                  textStyle: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              )),
-                                            ),
-                                          ),
-                                        ])),
-                                  )),
-                            ]))),
-                  ]))
-            ],
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      key: _globalKey,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Colors.deepPurpleAccent,
                 ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                getshareddata();
-                                Fetchuserbalance();
-                                Activate();
-                                Fetchprefsdata();
-                                _globalKey.currentState!.openDrawer();
-                              },
-                              child: Icon(
-                                Icons.menu,
-                                color: Colors.white,
-                                size: 40,
+                child: Stack(children: <Widget>[
+                  Positioned(
+                      top: 62,
+                      left: 48.3457260131836,
+                      child: Row(
+                        children: [
+                          Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Color.fromRGBO(81, 163, 163, 1),
+                                  width: 1,
+                                ),
+                                image: DecorationImage(
+                                    image: AssetImage('assets/bitcoin.png'),
+                                    fit: BoxFit.fitWidth),
+                                borderRadius:
+                                    BorderRadius.all(Radius.elliptical(80, 80)),
                               )),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-
-                CarouselSlider(
-                  carouselController: _controller,
-                  options: CarouselOptions(
-                    height: 250,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    aspectRatio: 2,
-                    viewportFraction: 0.9,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                  ),
-                  items: [
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage('assets/eth.jpg'),
-                              fit: BoxFit.cover)),
-                    ),
-
-//image2
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage('assets/bitcoin.png'),
-                              fit: BoxFit.cover)),
-                    ),
-
-                    //img3
-
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage('assets/cry1.png'),
-                              fit: BoxFit.cover)),
-                    ),
-
-                    //im4
-
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage('assets/cry2.png'),
-                              fit: BoxFit.cover)),
-                    ),
-
-                    //img5
-
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage('assets/cry4.png'),
-                              fit: BoxFit.cover)),
-                    ),
-
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage('assets/cry5.jpg'),
-                              fit: BoxFit.cover)),
-                    ),
-                  ],
-                ),
-
-                // SvgPicture.asset(
-                // "assets/girls.svg",
-                ////height: MediaQuery.of(context).size.height - 430,
-                // width: MediaQuery.of(context).size.width,
-                //  ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width - 15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "BITCOIN : ",
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                            color: Colors.deepPurpleAccent,
-                          )),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "               ${remoteConfig.getString("Bitcoins")}",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        )),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width - 15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "USDT: ",
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                            color: Colors.deepPurpleAccent,
-                          )),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width - 100,
-                        height: MediaQuery.of(context).size.height / 10,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "                     ${remoteConfig.getString("Usdt")}",
-                            style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            )),
+                          SizedBox(
+                            width: 20,
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width - 15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "ETHERIUM : ",
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                            color: Colors.deepPurpleAccent,
-                          )),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "             ${remoteConfig.getString("Etherium")}",
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        )),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width - 10,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Activate();
-                          },
-                          child: GestureDetector(
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () => getuserbalance(),
+                                child: Text(
+                                  "N $walletBalance",
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              GestureDetector(
+                                onTap: () => iddialog(),
+                                child: Icon(
+                                  Icons.visibility,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 168,
+                      left: 55.345726013183594,
+                      child: Row(
+                        children: [
+                          //textid
+                          Icon(Icons.account_balance_wallet,
+                              color: Colors.white, size: 30),
+
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Buycoin()));
+                                      builder: (context) =>
+                                          const Globalrates()));
                             },
-                            child: Container(
-                              height: MediaQuery.of(context).size.height / 12,
-                              width: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Buy",
-                                  style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(
-                                    color: Colors.deepPurpleAccent,
-                                  )),
+                            child: GestureDetector(
+                              onTap: () {
+                                Fetchuserbalance();
+                              },
+                              child: Text(
+                                "View My ID",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 70,
-                      ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 210,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              iddialog();
+                            },
+                            child: Text(
+                              "$useremail",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 257,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.web,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Globalrates()));
+                            },
+                            child: Text(
+                              "Global Rates",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 200,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          // Icon(
+                          //  Icons.wallet_giftcard,
+                          //  color: Colors.white,
+                          // ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 298,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.help,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              _launchURL();
+                            },
+                            child: Text(
+                              "Help and Support",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 340,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.gamepad,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Games()));
+                            },
+                            child: Text(
+                              "Play Games",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Positioned(
+                      top: 380,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.help,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Withdraws()));
+                            },
+                            child: Text(
+                              "Withdraws",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 420,
+                      left: 58.345726013183594,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Pass()));
+                            },
+                            child: Text(
+                              " Thiago Portal",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Positioned(
+                      top: 487,
+                      left: 55.345726013183594,
+                      child: Container(
+                          width: 156.1904754638672,
+                          height: 50,
+                          child: Stack(children: <Widget>[
+                            Positioned(
+                                top: 0,
+                                left: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+                                  },
+                                  child: Container(
+                                      width: 150,
+                                      height: 70,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                      ),
+                                      child: Stack(children: <Widget>[
+                                        Positioned(
+                                          top: 11,
+                                          left: 43,
+                                          child: Text(
+                                            "Logout ",
+                                            style: GoogleFonts.montserrat(
+                                                textStyle: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                          ),
+                                        ),
+                                      ])),
+                                )),
+                          ]))),
+                ]))
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: GestureDetector(
+                            onTap: () {
+                              getshareddata();
+                              Fetchuserbalance();
+                              Activate();
+                              Fetchprefsdata();
+                              _globalKey.currentState!.openDrawer();
+                            },
+                            child: Icon(
+                              Icons.menu,
+                              color: Colors.white,
+                              size: 40,
+                            )),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              CarouselSlider(
+                carouselController: _controller,
+                options: CarouselOptions(
+                  height: 250,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  aspectRatio: 2,
+                  viewportFraction: 0.9,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                ),
+                items: [
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/eth.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+
+//image2
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/bitcoin.png'),
+                            fit: BoxFit.cover)),
+                  ),
+
+                  //img3
+
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/cry1.png'),
+                            fit: BoxFit.cover)),
+                  ),
+
+                  //im4
+
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/cry2.png'),
+                            fit: BoxFit.cover)),
+                  ),
+
+                  //img5
+
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/cry4.png'),
+                            fit: BoxFit.cover)),
+                  ),
+
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/cry5.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                ],
+              ),
+
+              // SvgPicture.asset(
+              // "assets/girls.svg",
+              ////height: MediaQuery.of(context).size.height - 430,
+              // width: MediaQuery.of(context).size.width,
+              //  ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width - 15,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "BITCOIN : ",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.deepPurpleAccent,
+                        )),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "               ${remoteConfig.getString("Bitcoins")}",
+                      style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width - 15,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "USDT: ",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.deepPurpleAccent,
+                        )),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 100,
+                      height: MediaQuery.of(context).size.height / 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blue,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "                     ${remoteConfig.getString("Usdt")}",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          )),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width - 15,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "ETHERIUM : ",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.deepPurpleAccent,
+                        )),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "             ${remoteConfig.getString("Etherium")}",
+                      style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width - 10,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Activate();
+                        },
+                        child: GestureDetector(
                           onTap: () {
-                            Createrwallet();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Sellbtc()));
+                                    builder: (context) => Buycoin()));
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height / 12,
                             width: 120,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.blue,
+                              color: Colors.white,
                             ),
                             child: Center(
                               child: Text(
-                                "Sell",
+                                "Buy",
                                 style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.deepPurpleAccent,
                                 )),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                    SizedBox(
+                      width: 70,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Createrwallet();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Sellbtc()));
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 12,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.blue,
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Sell",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                color: Colors.white,
+                              )),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

@@ -109,232 +109,227 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.deepPurpleAccent,
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
+        body: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          const SizedBox(
-                            height: 80,
-                          ),
-                          SvgPicture.asset(
-                            "assets/loginguys.svg",
-                            height: MediaQuery.of(context).size.height - 430,
-                            width: MediaQuery.of(context).size.width - 200,
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Text(
-                            "Hello User",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Kindly Login to continue",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height / 12,
-                            width: MediaQuery.of(context).size.width - 25,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      SvgPicture.asset(
+                        "assets/loginguys.svg",
+                        height: MediaQuery.of(context).size.height - 430,
+                        width: MediaQuery.of(context).size.width - 200,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Hello User",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Kindly Login to continue",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height / 12,
+                        width: MediaQuery.of(context).size.width - 25,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please Enter Your Email";
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                setState(() {
+                                  _emailController.text = value!;
+                                });
+                              },
+                              controller: _emailController,
+                              style: GoogleFonts.montserrat(),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: " Enter Email",
+                                errorStyle: GoogleFonts.montserrat(
+                                    color: Colors.deepPurpleAccent),
+                                hintStyle: GoogleFonts.montserrat(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
+                                suffixIcon: Icon(
+                                  Icons.email,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                              ),
                             ),
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please Enter Your Email";
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) {
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height / 12,
+                        width: MediaQuery.of(context).size.width - 25,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please Enter Your Password";
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                setState(() {
+                                  _passwordController.text = value!;
+                                });
+                              },
+                              controller: _passwordController,
+                              style: GoogleFonts.montserrat(),
+                              obscureText: visible,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: " Enter Password",
+                                errorStyle: GoogleFonts.montserrat(
+                                    color: Colors.deepPurpleAccent),
+                                hintStyle: GoogleFonts.montserrat(
+                                    color: Colors.black, fontSize: 18),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
                                     setState(() {
-                                      _emailController.text = value!;
+                                      visible = !visible;
                                     });
+
+
                                   },
-                                  controller: _emailController,
-                                  style: GoogleFonts.montserrat(),
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: " Enter Email",
-                                    errorStyle: GoogleFonts.montserrat(
-                                        color: Colors.deepPurpleAccent),
-                                    hintStyle: GoogleFonts.montserrat(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                    suffixIcon: Icon(
-                                      Icons.email,
-                                      color: Colors.black,
-                                      size: 30,
-                                    ),
+                                  child: Icon(
+                                    visible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                        color: Colors.black,
+                                        size: 30,
+                                    //Icons.lock_open,
+                                    //color: Colors.black,
+                                   // size: 30,
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height / 12,
-                            width: MediaQuery.of(context).size.width - 25,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please Enter Your Password";
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) {
-                                    setState(() {
-                                      _passwordController.text = value!;
-                                    });
-                                  },
-                                  controller: _passwordController,
-                                  style: GoogleFonts.montserrat(),
-                                  obscureText: visible,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: " Enter Password",
-                                    errorStyle: GoogleFonts.montserrat(
-                                        color: Colors.deepPurpleAccent),
-                                    hintStyle: GoogleFonts.montserrat(
-                                        color: Colors.black, fontSize: 18),
-                                    suffixIcon: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          visible = !visible;
-                                        });
-                                      
-                                        
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            Signinconfig();
+                            // Login();
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    "Error",
+                                    style: GoogleFonts.montserrat(),
+                                  ),
+                                  content: Text(
+                                    "Invalid email or password",
+                                    style: GoogleFonts.montserrat(),
+                                  ),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Close",
+                                          style: GoogleFonts.montserrat()),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
                                       },
-                                      child: Icon(
-                                        visible
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                            color: Colors.black,
-                                            size: 30,
-                                        //Icons.lock_open,
-                                        //color: Colors.black,
-                                       // size: 30,
-                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            //Fluttertoast.showToast(msg: "Invalid Entries");
+                          }
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 12,
+                          width: MediaQuery.of(context).size.width - 25,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Login",
+                                  style: GoogleFonts.montserrat(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                Signinconfig();
-                                // Login();
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text(
-                                        "Error",
-                                        style: GoogleFonts.montserrat(),
-                                      ),
-                                      content: Text(
-                                        "Invalid email or password",
-                                        style: GoogleFonts.montserrat(),
-                                      ),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text("Close",
-                                              style: GoogleFonts.montserrat()),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                //Fluttertoast.showToast(msg: "Invalid Entries");
-                              }
-                            },
-                            child: Container(
-                              height: MediaQuery.of(context).size.height / 12,
-                              width: MediaQuery.of(context).size.width - 25,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Login",
-                                      style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Icon(Icons.arrow_forward,
-                                        color: Colors.white),
-                                  ],
+                                SizedBox(
+                                  width: 20,
                                 ),
-                              ),
+                                Icon(Icons.arrow_forward,
+                                    color: Colors.white),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   Tradeground() {}
