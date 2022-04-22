@@ -419,38 +419,6 @@ class _TradeGroundState extends State<TradeGround> {
                           ),
                         ],
                       )),
-                  Positioned(
-                      top: 340,
-                      left: 58.345726013183594,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.gamepad,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Games()));
-                            },
-                            child: Text(
-                              "Play Games",
-                              style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
                   SizedBox(
                     height: 10,
                   ),
