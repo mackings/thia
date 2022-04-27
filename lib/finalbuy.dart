@@ -138,7 +138,7 @@ class _finalbuyState extends State<finalbuy> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: " Enter Crypto Name",
+                            hintText: " Enter Asset Name",
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.deepPurpleAccent,
                             ),
@@ -151,7 +151,7 @@ class _finalbuyState extends State<finalbuy> {
                             if (value == null ||
                                 value.isEmpty ||
                                 value.length < 7) {
-                              return "Please Enter a valid crypto name";
+                              return "Please Enter a valid Asset name";
                             }
                             return null;
                           },
@@ -182,7 +182,7 @@ class _finalbuyState extends State<finalbuy> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: " Enter wallet Address",
+                            hintText: " Enter Address",
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.deepPurpleAccent,
                             ),
@@ -195,7 +195,7 @@ class _finalbuyState extends State<finalbuy> {
                             if (value == null ||
                                 value.isEmpty &&
                                     RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                              return "Please Enter a valid wallet Address";
+                              return "Please Enter a valid Address";
                             }
                             return null;
                           },
@@ -226,7 +226,7 @@ class _finalbuyState extends State<finalbuy> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: " Enter Wallet Email Address",
+                            hintText: " Enter Email Address",
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.deepPurpleAccent,
                             ),
@@ -237,7 +237,7 @@ class _finalbuyState extends State<finalbuy> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "Please Enter  a valid Wallet email";
+                              return "Please Enter  a valid  email";
                             }
                             return null;
                           },
@@ -302,11 +302,11 @@ class _finalbuyState extends State<finalbuy> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             content: Text(
-                              "Confirm Trade ?",
+                              "Confirm Exchange ?",
                               style: GoogleFonts.montserrat(),
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 child: Text("YES",
                                     style: GoogleFonts.montserrat()),
                                 onPressed: () {
@@ -322,11 +322,11 @@ class _finalbuyState extends State<finalbuy> {
                                             style: GoogleFonts.montserrat(),
                                           ),
                                           content: Text(
-                                            "Your Trade has been Submitted, You would be contacted soon",
+                                            "Your Exchange Request has been Submitted, You would be contacted soon",
                                             style: GoogleFonts.montserrat(),
                                           ),
                                           actions: <Widget>[
-                                            FlatButton(
+                                            MaterialButton(
                                               child: Text("Continue",
                                                   style:
                                                       GoogleFonts.montserrat()),
@@ -339,7 +339,7 @@ class _finalbuyState extends State<finalbuy> {
                                                             TradeGround()));
                                               },
                                             ),
-                                            FlatButton(
+                                            MaterialButton(
                                               child: Text("Home",
                                                   style:
                                                       GoogleFonts.montserrat()),
@@ -363,7 +363,7 @@ class _finalbuyState extends State<finalbuy> {
                                   }
                                 },
                               ),
-                              FlatButton(
+                              MaterialButton(
                                 child:
                                     Text("NO", style: GoogleFonts.montserrat()),
                                 onPressed: () {
@@ -384,7 +384,7 @@ class _finalbuyState extends State<finalbuy> {
                       ),
                       child: Center(
                         child: Text(
-                          "Buy Now ",
+                          "Proceed ",
                           style: GoogleFonts.montserrat(
                               textStyle: const TextStyle(
                             color: Colors.white,

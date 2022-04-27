@@ -1,3 +1,6 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "dart.previewHotReloadOnSaveWatcher": false,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 10
 }

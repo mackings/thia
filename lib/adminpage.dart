@@ -262,7 +262,7 @@ class _AdminState extends State<Admin> {
                               title: Text('Transaction Successful'),
                               content: Text('User has been credited'),
                               actions: <Widget>[
-                                FlatButton(
+                                MaterialButton(
                                   child: Text('OK'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
@@ -401,7 +401,7 @@ class _AdminState extends State<Admin> {
                                 ),
                               ),
                               actions: [
-                                FlatButton(
+                                MaterialButton(
                                   child: Text(
                                     'Yes',
                                     style: GoogleFonts.montserrat(
@@ -428,7 +428,7 @@ class _AdminState extends State<Admin> {
                                     // Navigator.pop(context);
                                   },
                                 ),
-                                FlatButton(
+                                MaterialButton(
                                   child: Text(
                                     'No',
                                     style: GoogleFonts.montserrat(

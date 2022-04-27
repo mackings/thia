@@ -193,7 +193,7 @@ class _TradeGroundState extends State<TradeGround> {
               child: Text('$walletID',
                   style: GoogleFonts.montserrat(fontSize: 20))),
           actions: <Widget>[
-            FlatButton(
+            MaterialButton(
               child: Text('Close'),
               onPressed: () {
                 Navigator.pop(context);
@@ -423,7 +423,7 @@ class _TradeGroundState extends State<TradeGround> {
                     height: 10,
                   ),
                   Positioned(
-                      top: 380,
+                      top: 350,
                       left: 58.345726013183594,
                       child: Row(
                         children: [
@@ -455,7 +455,7 @@ class _TradeGroundState extends State<TradeGround> {
                         ],
                       )),
                   Positioned(
-                      top: 420,
+                      top: 400,
                       left: 58.345726013183594,
                       child: Row(
                         children: [
@@ -536,7 +536,7 @@ class _TradeGroundState extends State<TradeGround> {
           child: Column(
             children: [
               SizedBox(
-                height: 20,
+                height: 0,
               ),
               Row(
                 children: [
@@ -562,6 +562,9 @@ class _TradeGroundState extends State<TradeGround> {
                     ],
                   ),
                 ],
+              ),
+              SizedBox(
+                width: 20,
               ),
 
               CarouselSlider(
@@ -773,7 +776,7 @@ class _TradeGroundState extends State<TradeGround> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Container(
                 height: MediaQuery.of(context).size.height / 10,
@@ -807,7 +810,7 @@ class _TradeGroundState extends State<TradeGround> {
                             ),
                             child: Center(
                               child: Text(
-                                "Buy",
+                                "Our Excange",
                                 style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
                                   color: Colors.deepPurpleAccent,
@@ -840,7 +843,7 @@ class _TradeGroundState extends State<TradeGround> {
                           ),
                           child: Center(
                             child: Text(
-                              "Sell",
+                              "Yours",
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                 color: Colors.white,

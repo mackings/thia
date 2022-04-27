@@ -235,7 +235,7 @@ class _SellbtcState extends State<Sellbtc> {
                                   child: Text(
                                       "${WALLETConfig.getString("BTCWALLET")}")),
                               actions: [
-                                FlatButton(
+                                MaterialButton(
                                   child: Text(
                                     "Ok",
                                   ),
@@ -282,7 +282,7 @@ class _SellbtcState extends State<Sellbtc> {
                                       child: Text(
                                           "${WALLETConfig.getString("Ethwallet")}"))),
                               actions: [
-                                FlatButton(
+                                MaterialButton(
                                   child: Text("ok"),
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -327,7 +327,7 @@ class _SellbtcState extends State<Sellbtc> {
                                       child: Text(
                                           "${WALLETConfig.getString("Usdtwallet")}"))),
                               actions: [
-                                FlatButton(
+                                MaterialButton(
                                   child: Text("ok"),
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -384,7 +384,7 @@ class _SellbtcState extends State<Sellbtc> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 actions: [
-                                  FlatButton(
+                                  MaterialButton(
                                     child: Text("Close"),
                                     onPressed: () {
                                       Navigator.pop(context);
@@ -575,8 +575,8 @@ class _SellbtcState extends State<Sellbtc> {
                                               return AlertDialog(
                                                 content: Text(
                                                   "Please upload your screenshot",
-                                                  style: GoogleFonts
-                                                      .montserrat(),
+                                                  style:
+                                                      GoogleFonts.montserrat(),
                                                 ),
                                                 actions: [
                                                   MaterialButton(
@@ -615,7 +615,7 @@ class _SellbtcState extends State<Sellbtc> {
                                               style: GoogleFonts.montserrat(),
                                             ),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              MaterialButton(
                                                 child: Text("Continue",
                                                     style: GoogleFonts
                                                         .montserrat()),
@@ -627,7 +627,7 @@ class _SellbtcState extends State<Sellbtc> {
                                                               TradeGround()));
                                                 },
                                               ),
-                                              FlatButton(
+                                              MaterialButton(
                                                 child: Text("Home",
                                                     style: GoogleFonts
                                                         .montserrat()),

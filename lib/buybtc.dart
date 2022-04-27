@@ -50,11 +50,11 @@ class BuycoinState extends State<Buycoin> {
           child: Column(
             children: [
               SizedBox(
-                height: 70,
+                height: 50,
               ),
               SvgPicture.asset(
                 "assets/buy.svg",
-                height: MediaQuery.of(context).size.height - 430,
+                height: MediaQuery.of(context).size.height - 470,
                 width: MediaQuery.of(context).size.width,
               ),
               SizedBox(
@@ -175,7 +175,7 @@ class BuycoinState extends State<Buycoin> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         content: Text(
-                          "Ready to  Buy ?",
+                          "Check Thiago Rates?",
                           style: GoogleFonts.montserrat(),
                         ),
                         actions: [
@@ -215,7 +215,7 @@ class BuycoinState extends State<Buycoin> {
                     ),
                     child: Center(
                       child: Text(
-                        "Buy Now",
+                        "Exchange ",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.white,

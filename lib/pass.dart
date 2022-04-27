@@ -45,7 +45,7 @@ class _PassState extends State<Pass> {
                 ),
               ),
               actions: <Widget>[
-                FlatButton(
+                MaterialButton(
                   child: Text(
                     'Ok',
                     style: GoogleFonts.montserrat(
@@ -128,7 +128,7 @@ class _PassState extends State<Pass> {
               Container(
                 width: MediaQuery.of(context).size.width - 30,
                 height: 50,
-                child: RaisedButton(
+                child: MaterialButton(
                   color: Colors.deepPurpleAccent,
                   onPressed: () {
                     unlockpage();

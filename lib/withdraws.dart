@@ -218,7 +218,7 @@ class _WithdrawsState extends State<Withdraws> {
                           ),
                         ),
                         actions: [
-                          FlatButton(
+                          MaterialButton(
                             child: Text(
                               "OK",
                               style: GoogleFonts.montserrat(

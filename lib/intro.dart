@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thiago_exchange/createacc.dart';
 import 'package:thiago_exchange/login.dart';
+import 'package:thiago_exchange/tradeground.dart';
 import "package:video_player/video_player.dart";
 
 class Intro1 extends StatefulWidget {
@@ -16,6 +18,22 @@ class Intro1 extends StatefulWidget {
 }
 
 class _Intro1State extends State<Intro1> {
+  keepAuthstate() async {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TradeGround()),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      }
+    });
+  }
+
   VideoPlayerController _mycontroller = VideoPlayerController.asset(
     "assets/btcvideo.mp4",
   );
@@ -77,6 +95,22 @@ class Enter extends StatefulWidget {
 }
 
 class _EnterState extends State<Enter> {
+  keepAuthstate() async {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TradeGround()),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -111,7 +145,7 @@ class _EnterState extends State<Enter> {
 
           Center(
             child: Text(
-              "Your Best Plug for Crypto Trades",
+              "Your Best Exchange Plug",
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(
                   color: Colors.white,
@@ -156,8 +190,10 @@ class _EnterState extends State<Enter> {
           Center(
             child: GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                keepAuthstate();
+
+                // Navigator.push(
+                //context, MaterialPageRoute(builder: (context) => Login()));
               },
               child: Container(
                 height: MediaQuery.of(context).size.height / 12,

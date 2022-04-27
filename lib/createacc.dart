@@ -139,7 +139,7 @@ class _CreateAccState extends State<CreateAcc> {
                 style: GoogleFonts.montserrat(),
               ),
               actions: <Widget>[
-                FlatButton(
+                MaterialButton(
                   child: Text(
                     "OK",
                     style: GoogleFonts.montserrat(),
@@ -162,7 +162,7 @@ class _CreateAccState extends State<CreateAcc> {
               ),
               content: Text(e.message),
               actions: <Widget>[
-                FlatButton(
+                MaterialButton(
                   child: Text(
                     "OK",
                     style: GoogleFonts.montserrat(),
