@@ -59,7 +59,7 @@ class _WithdrawsState extends State<Withdraws> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Icon(Icons.arrow_back_ios,color: Colors.white,),
-              Text("Withdraw Funds",
+              Text("Request Exchnage",
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 20,
@@ -76,7 +76,7 @@ class _WithdrawsState extends State<Withdraws> {
             padding: const EdgeInsets.all(15.0),
             child: Center(
               child: Text(
-                "Note 1:  Withdrawals from your accounts would automatically sent a Withdraw request ",
+                "Note 1:  Exchanges from your accounts would automatically sent a Withdraw request ",
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                     fontSize: 18,
@@ -140,7 +140,7 @@ class _WithdrawsState extends State<Withdraws> {
                   },
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: " Enter Wallet Amount",
+                    hintText: " Enter Exchange Amount",
                     hintStyle: GoogleFonts.montserrat(
                       color: Colors.black,
                     ),
@@ -170,7 +170,7 @@ class _WithdrawsState extends State<Withdraws> {
                   controller: _controller,
                   validator: (value) {
                     if (value!.isEmpty || value.length < 15) {
-                      return 'Please enter Withdraw Amount';
+                      return 'Please enter Exchange Amount';
                     }
                     return null;
                   },
