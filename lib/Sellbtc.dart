@@ -233,7 +233,7 @@ class _SellbtcState extends State<Sellbtc> {
                             return AlertDialog(
                               title: Selectable(
                                   child: Text(
-                                      "${WALLETConfig.getString("BTCWALLET")}")),
+                                      "Btc Address: \n ${WALLETConfig.getString("BTCWALLET")}")),
                               actions: [
                                 MaterialButton(
                                   child: Text(
@@ -280,7 +280,7 @@ class _SellbtcState extends State<Sellbtc> {
                               title: Selectable(
                                   child: Center(
                                       child: Text(
-                                          "${WALLETConfig.getString("Ethwallet")}"))),
+                                          "Eth Address: \n ${WALLETConfig.getString("Ethwallet")}"))),
                               actions: [
                                 MaterialButton(
                                   child: Text("ok"),
@@ -325,7 +325,7 @@ class _SellbtcState extends State<Sellbtc> {
                               title: Selectable(
                                   child: Center(
                                       child: Text(
-                                          "${WALLETConfig.getString("Usdtwallet")}"))),
+                                          "Usdt Address: \n ${WALLETConfig.getString("Usdtwallet")}"))),
                               actions: [
                                 MaterialButton(
                                   child: Text("ok"),
